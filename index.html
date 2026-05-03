@@ -817,89 +817,136 @@ section.why > * {
       </div>
     </div>
 
-    <div class="form-card">
-      <div id="form-inner">
-        <h3 class="form-h">Request Your Free Proposal</h3>
-        <p class="form-sub">We'll respond within 24 hours with tailored options and pricing.</p>
+<div class="form-card">
+  <div id="form-inner">
+    <h3 class="form-h">Request Your Free Proposal</h3>
+    <p class="form-sub">We'll respond within 24 hours with tailored options and pricing.</p>
 
-        <div class="frow">
-          <div class="fld"><label>First Name *</label><input type="text" placeholder="Sarah" id="fname"></div>
-          <div class="fld"><label>Last Name *</label><input type="text" placeholder="Johnson" id="lname"></div>
-        </div>
-        <div class="frow">
-          <div class="fld"><label>Work Email *</label><input type="email" placeholder="sarah@company.com" id="email"></div>
-          <div class="fld"><label>Phone / WhatsApp *</label><input type="tel" placeholder="+66 xxx xxx xxxx" id="phone"></div>
-        </div>
-        <div class="frow">
-          <div class="fld"><label>Company Name *</label><input type="text" placeholder="Acme Corporation" id="company"></div>
-          <div class="fld"><label>Your Role</label><input type="text" placeholder="HR Manager / Events Lead" id="role"></div>
-        </div>
-        <div class="frow">
-          <div class="fld">
-            <label>Type of Event *</label>
-            <select id="event-type">
-              <option value="" disabled selected>Select package...</option>
-              <option>Corporate Family Day</option>
-              <option>Team Building</option>
-              <option>Conference / Incentive</option>
-              <option>Corporate Retreat</option>
-              <option>Product Launch</option>
-              <option>Gala / VIP Night</option>
-              <option>School Group</option>
-              <option>Birthday / Celebration</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-          <div class="fld">
-            <label>Estimated Group Size *</label>
-            <select id="group-size">
-              <option value="" disabled selected>Number of guests...</option>
-              <option>50 – 100</option>
-              <option>101 – 300</option>
-              <option>301 – 500</option>
-              <option>501 – 1,000</option>
-              <option>1,001 – 5,000</option>
-              <option>5,000+</option>
-            </select>
-          </div>
-        </div>
-        <div class="frow">
-          <div class="fld"><label>Preferred Date / Month</label><input type="text" placeholder="e.g. November 2025 or flexible" id="date"></div>
-          <div class="fld">
-            <label>Approximate Budget (THB)</label>
-            <select id="budget">
-              <option value="" disabled selected>Budget range...</option>
-              <option>Under ฿100,000</option>
-              <option>฿100,000 – ฿300,000</option>
-              <option>฿300,000 – ฿700,000</option>
-              <option>฿700,000 – ฿2,000,000</option>
-              <option>฿2,000,000+</option>
-              <option>To be confirmed</option>
-            </select>
-          </div>
-        </div>
-        <div class="frow one">
-          <div class="fld"><label>Anything else we should know?</label><textarea placeholder="Special requirements, dietary needs, entertainment preferences, accessibility..." id="message"></textarea></div>
+    <form action="https://formspree.io/f/maqvqapk" method="POST">
+      <div class="frow">
+        <div class="fld">
+          <label for="fname">First Name *</label>
+          <input type="text" placeholder="Sarah" id="fname" name="First Name" required>
         </div>
 
-        <button class="form-btn" onclick="handleSubmit(event)">Send My Free Proposal Request →</button>
-        <p class="form-note">We respect your privacy. Your details are only used to prepare your proposal and will never be shared or sold.</p>
-
-        <div class="form-or">or reach us directly</div>
-        <div class="c-alts">
-          <a href="tel:+66611596553" class="c-alt"><span class="c-alt-ic">📞</span>Call / WhatsApp: +66 (0)61 159 6553</a>
-          <a href="mailto:info@columbiapicturesaquaverse.com?subject=Corporate%20Event%20Enquiry" class="c-alt"><span class="c-alt-ic">✉️</span>info@columbiapicturesaquaverse.com</a>
+        <div class="fld">
+          <label for="lname">Last Name *</label>
+          <input type="text" placeholder="Johnson" id="lname" name="Last Name" required>
         </div>
       </div>
 
-      <div class="success" id="success-msg">
-        <span class="chk">🎬</span>
-        <h3>Proposal Request Sent!</h3>
-        <p>Thank you! Our corporate events team will be in touch within <strong style="color:var(--cyan)">24 hours</strong> with a tailored proposal for your team.<br><br>Want to talk sooner? Call us on <strong style="color:var(--cyan)">+66 (0)61 159 6553</strong> anytime.</p>
+      <div class="frow">
+        <div class="fld">
+          <label for="email">Work Email *</label>
+          <input type="email" placeholder="sarah@company.com" id="email" name="Work Email" required>
+        </div>
+
+        <div class="fld">
+          <label for="phone">Phone / WhatsApp *</label>
+          <input type="tel" placeholder="+66 xxx xxx xxxx" id="phone" name="Phone / WhatsApp" required>
+        </div>
       </div>
+
+      <div class="frow">
+        <div class="fld">
+          <label for="company">Company Name *</label>
+          <input type="text" placeholder="Acme Corporation" id="company" name="Company Name" required>
+        </div>
+
+        <div class="fld">
+          <label for="role">Your Role</label>
+          <input type="text" placeholder="HR Manager / Events Lead" id="role" name="Your Role">
+        </div>
+      </div>
+
+      <div class="frow">
+        <div class="fld">
+          <label for="event-type">Type of Event *</label>
+          <select id="event-type" name="Type of Event" required>
+            <option value="" disabled selected>Select package...</option>
+            <option>Corporate Family Day</option>
+            <option>Team Building</option>
+            <option>Conference / Incentive</option>
+            <option>Corporate Retreat</option>
+            <option>Product Launch</option>
+            <option>Gala / VIP Night</option>
+            <option>School Group</option>
+            <option>Birthday / Celebration</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="fld">
+          <label for="group-size">Estimated Group Size *</label>
+          <select id="group-size" name="Estimated Group Size" required>
+            <option value="" disabled selected>Number of guests...</option>
+            <option>50 – 100</option>
+            <option>101 – 300</option>
+            <option>301 – 500</option>
+            <option>501 – 1,000</option>
+            <option>1,001 – 5,000</option>
+            <option>5,000+</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="frow">
+        <div class="fld">
+          <label for="date">Preferred Date / Month</label>
+          <input type="text" placeholder="e.g. November 2025 or flexible" id="date" name="Preferred Date / Month">
+        </div>
+
+        <div class="fld">
+          <label for="budget">Approximate Budget (THB)</label>
+          <select id="budget" name="Approximate Budget (THB)">
+            <option value="" disabled selected>Budget range...</option>
+            <option>Under ฿100,000</option>
+            <option>฿100,000 – ฿300,000</option>
+            <option>฿300,000 – ฿700,000</option>
+            <option>฿700,000 – ฿2,000,000</option>
+            <option>฿2,000,000+</option>
+            <option>To be confirmed</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="frow one">
+        <div class="fld">
+          <label for="message">Anything else we should know?</label>
+          <textarea
+            placeholder="Special requirements, dietary needs, entertainment preferences, accessibility..."
+            id="message"
+            name="Anything else we should know?"
+          ></textarea>
+        </div>
+      </div>
+
+      <input type="hidden" name="_subject" value="New Aquaverse Corporate Proposal Request">
+
+      <button type="submit" class="form-btn">
+        Send My Free Proposal Request →
+      </button>
+
+      <p class="form-note">
+        We respect your privacy. Your details are only used to prepare your proposal and will never be shared or sold.
+      </p>
+    </form>
+
+    <div class="form-or">or reach us directly</div>
+
+    <div class="c-alts">
+      <a href="tel:+66611596553" class="c-alt">
+        <span class="c-alt-ic">📞</span>
+        Call / WhatsApp: +66 (0)61 159 6553
+      </a>
+
+      <a href="mailto:info@columbiapicturesaquaverse.com?subject=Corporate%20Event%20Enquiry" class="c-alt">
+        <span class="c-alt-ic">✉️</span>
+        info@columbiapicturesaquaverse.com
+      </a>
     </div>
   </div>
-</section>
+</div>
 
 <footer>
   <div class="foot-inner">
