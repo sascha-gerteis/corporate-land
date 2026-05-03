@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corporate Events — Columbia Pictures Aquaverse</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue: #0066CC;
+  --blue-bright: #1A88FF;
+  --blue-dark: #003D7A;
+  --cyan: #00C2FF;
+  --bg: #050F1C;
+  --bg2: #071525;
+  --bg3: #0A1E35;
+  --surface: #0D2544;
+  --surface2: #102B50;
+  --white: #FFFFFF;
+  --off-white: #E8F0FA;
+  --muted: rgba(232,240,250,0.5);
+  --border: rgba(0,130,255,0.18);
+  --serif: 'Syne', sans-serif;
+  --sans: 'Inter', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--bg); color: var(--white); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(5,15,28,0.94);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+}
+.nav-logo { font-family: var(--serif); font-weight: 800; font-size: 15px; color: var(--cyan); letter-spacing: 0.04em; }
+.nav-right { display: flex; align-items: center; gap: 24px; }
+.nav-tel { font-size: 13px; color: var(--cyan); font-weight: 500; text-decoration: none; }
+.nav-cta {
+  background: var(--blue-bright); color: #fff;
+  font-size: 13px; font-weight: 500;
+  padding: 10px 22px; border-radius: 6px;
+  text-decoration: none; transition: background 0.2s, transform 0.15s; white-space: nowrap;
+}
+.nav-cta:hover { background: var(--cyan); color: var(--bg); transform: translateY(-1px); }
+
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  overflow: hidden; padding: 0;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+}
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--bg) 0%, rgba(5,15,28,0.7) 45%, rgba(5,15,28,0.2) 100%);
+}
+.hero-content { position: relative; z-index: 2; padding: 0 48px 80px; max-width: 860px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 20px;
+}
+.eyebrow span { display: inline-block; width: 32px; height: 1px; background: var(--cyan); }
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(44px, 7vw, 86px);
+  font-weight: 800; line-height: 1.0;
+  margin-bottom: 24px; letter-spacing: -0.02em;
+}
+.hero h1 .ac { color: var(--cyan); }
+.hero-sub {
+  font-size: 18px; font-weight: 300;
+  color: rgba(232,240,250,0.72); max-width: 560px;
+  margin-bottom: 36px; line-height: 1.65;
+}
+.hero-btns { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.btn-pry {
+  background: var(--blue-bright); color: #fff;
+  font-size: 14px; font-weight: 500;
+  padding: 15px 32px; border-radius: 7px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.15s; display: inline-block;
+}
+.btn-pry:hover { background: var(--cyan); color: var(--bg); transform: translateY(-1px); }
+.btn-ghost {
+  background: transparent; color: var(--white);
+  font-size: 14px; padding: 14px 32px; border-radius: 7px;
+  border: 1px solid rgba(255,255,255,0.25); text-decoration: none;
+  transition: border-color 0.2s, color 0.2s; display: inline-block; cursor: pointer;
+}
+.btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+
+.trust-bar {
+  background: var(--surface);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: repeat(4,1fr);
+}
+.trust-item { padding: 32px 24px; border-right: 1px solid var(--border); text-align: center; }
+.trust-item:last-child { border-right: none; }
+.trust-num { font-family: var(--serif); font-size: 42px; font-weight: 800; color: var(--cyan); display: block; line-height: 1; margin-bottom: 6px; }
+.trust-lbl { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+
+section { padding: 88px 48px; }
+.s-eye {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 14px;
+}
+.s-eye span { width: 28px; height: 1px; background: var(--cyan); display: inline-block; }
+.s-h2 { font-family: var(--serif); font-size: clamp(32px, 4.5vw, 52px); font-weight: 800; line-height: 1.08; margin-bottom: 18px; letter-spacing: -0.02em; }
+.s-h2 .ac { color: var(--cyan); }
+.s-lead { font-size: 17px; font-weight: 300; color: var(--muted); max-width: 540px; line-height: 1.7; margin-bottom: 52px; }
+
+.why { background: var(--bg2); }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.why-img-wrap { position: relative; }
+.why-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 12px; display: block; }
+.why-badge {
+  position: absolute; bottom: -20px; right: -20px;
+  background: var(--blue-bright); border-radius: 10px;
+  padding: 18px 22px; text-align: center;
+  box-shadow: 0 8px 32px rgba(0,102,204,0.45);
+}
+.why-badge strong { display: block; font-family: var(--serif); font-size: 28px; font-weight: 800; color: #fff; line-height: 1; }
+.why-badge span { font-size: 11px; color: rgba(255,255,255,0.75); letter-spacing: 0.1em; text-transform: uppercase; }
+.why-points { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+.why-pt {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px 18px; background: var(--surface);
+  border-radius: 10px; border: 1px solid var(--border); transition: border-color 0.2s;
+}
+.why-pt:hover { border-color: rgba(0,194,255,0.35); }
+.w-ic { width: 38px; height: 38px; flex-shrink: 0; background: rgba(0,130,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.why-pt strong { display: block; font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+.why-pt p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+.services { background: var(--bg); }
+.svc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.svc-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.svc-card:hover { border-color: rgba(0,194,255,0.4); transform: translateY(-3px); }
+.svc-card.star { border-color: var(--blue-bright); }
+.svc-img { width: 100%; height: 180px; object-fit: cover; display: block; }
+.svc-body { padding: 20px; }
+.svc-tag { display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); background: rgba(0,194,255,0.1); padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+.svc-pop { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--blue-bright); padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; margin-left: 6px; }
+.svc-h3 { font-family: var(--serif); font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.svc-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+.svc-feats { list-style: none; }
+.svc-feats li { font-size: 12px; color: rgba(232,240,250,0.65); padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 8px; }
+.svc-feats li:last-child { border-bottom: none; }
+.svc-feats li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; }
+
+.gallery { background: var(--bg3); }
+.gal-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 250px 250px; gap: 8px;
+  border-radius: 12px; overflow: hidden; margin-top: 0;
+}
+.g-tile { position: relative; overflow: hidden; }
+.g-tile:first-child { grid-row: 1/3; }
+.g-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+.g-tile:hover img { transform: scale(1.05); }
+.g-lbl { position: absolute; bottom: 12px; left: 12px; background: rgba(5,15,28,0.78); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); padding: 5px 11px; border-radius: 4px; }
+
+.partners-bar { background: var(--bg2); padding: 48px; }
+.p-label { text-align: center; font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; }
+.logos-row { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; justify-content: center; }
+.logos-row img { height: 34px; object-fit: contain; opacity: 0.5; filter: brightness(10); transition: opacity 0.2s; }
+.logos-row img:hover { opacity: 0.85; }
+
+.testi { background: var(--bg2); }
+.testi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.t-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 26px; }
+.stars { color: #FFD700; font-size: 15px; margin-bottom: 14px; letter-spacing: 2px; }
+.t-quote { font-size: 15px; color: var(--off-white); line-height: 1.65; margin-bottom: 16px; font-style: italic; }
+.t-who { font-size: 12px; font-weight: 600; color: var(--cyan); }
+.t-big { background: var(--surface2); border: 1px solid rgba(0,194,255,0.2); border-radius: 12px; padding: 36px; position: relative; }
+.t-big::before { content: '"'; font-family: var(--serif); font-size: 100px; font-weight: 800; color: rgba(0,194,255,0.1); position: absolute; top: 8px; left: 22px; line-height: 1; }
+.t-big p { font-family: var(--serif); font-size: 21px; font-weight: 600; line-height: 1.5; color: var(--off-white); position: relative; z-index: 1; margin-bottom: 14px; }
+.t-big cite { font-size: 12px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; font-style: normal; }
+
+.process { background: var(--bg); }
+.proc-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; margin-top: 52px; }
+.proc-row::before { content: ''; position: absolute; top: 28px; left: 12%; right: 12%; height: 1px; background: linear-gradient(to right, transparent, var(--blue-bright), transparent); }
+.p-step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+.p-num { width: 56px; height: 56px; border-radius: 50%; background: var(--surface); border: 2px solid var(--blue-bright); display: flex; align-items: center; justify-content: center; margin: 0 auto 22px; font-family: var(--serif); font-size: 22px; font-weight: 800; color: var(--cyan); }
+.p-step h3 { font-family: var(--serif); font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+.p-step p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+.awards-bar { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 40px 48px; display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.aw { text-align: center; }
+.aw-name { font-size: 13px; font-weight: 600; color: var(--cyan); display: block; margin-bottom: 3px; }
+.aw-sub { font-size: 11px; color: var(--muted); }
+.aw-div { width: 1px; height: 40px; background: var(--border); }
+
+.location { background: var(--bg3); }
+.loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+.loc-rows { display: flex; flex-direction: column; }
+.loc-row { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.loc-row:first-child { border-top: 1px solid var(--border); }
+.loc-ic { color: var(--cyan); font-size: 18px; width: 22px; text-align: center; flex-shrink: 0; margin-top: 2px; }
+.loc-row strong { display: block; font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+.loc-row p { font-size: 13px; color: var(--muted); }
+.loc-map { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 1; background: var(--surface); position: relative; }
+.loc-map img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.loc-pin { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--blue-bright); color: #fff; text-align: center; padding: 11px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; white-space: nowrap; }
+
+/* ── LEAD FORM ── */
+.lead { background: var(--bg2); padding: 88px 48px; }
+.lead-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; max-width: 1200px; margin: 0 auto; }
+.lead-bens { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
+.lb { display: flex; gap: 12px; align-items: flex-start; }
+.lb-ic { width: 36px; height: 36px; flex-shrink: 0; background: rgba(0,130,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.lb strong { display: block; font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+.lb p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+.form-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 36px; }
+.form-h { font-family: var(--serif); font-size: 24px; font-weight: 800; margin-bottom: 6px; }
+.form-sub { font-size: 13px; color: var(--muted); margin-bottom: 26px; line-height: 1.5; }
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.frow.one { grid-template-columns: 1fr; }
+.fld { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.fld label { font-size: 12px; font-weight: 500; color: var(--off-white); }
+.fld input, .fld select, .fld textarea {
+  background: var(--bg); border: 1px solid rgba(0,130,255,0.25); border-radius: 8px;
+  color: var(--white); font-family: var(--sans); font-size: 14px;
+  padding: 12px 14px; outline: none; transition: border-color 0.2s; width: 100%;
+}
+.fld input::placeholder, .fld textarea::placeholder { color: rgba(232,240,250,0.3); }
+.fld input:focus, .fld select:focus, .fld textarea:focus { border-color: var(--cyan); }
+.fld select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2300C2FF' d='M6 8L0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+.fld select option { background: var(--bg2); color: var(--white); }
+.fld textarea { resize: vertical; min-height: 88px; }
+.form-btn {
+  width: 100%; background: var(--blue-bright); color: #fff;
+  font-family: var(--serif); font-size: 16px; font-weight: 700;
+  padding: 16px; border: none; border-radius: 8px;
+  cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 4px;
+}
+.form-btn:hover { background: var(--cyan); color: var(--bg); transform: translateY(-1px); }
+.form-note { text-align: center; font-size: 11px; color: rgba(232,240,250,0.32); margin-top: 14px; line-height: 1.5; }
+.form-or { text-align: center; font-size: 12px; color: var(--muted); margin: 18px 0 14px; position: relative; }
+.form-or::before, .form-or::after { content: ''; position: absolute; top: 50%; width: 38%; height: 1px; background: var(--border); }
+.form-or::before { left: 0; } .form-or::after { right: 0; }
+.c-alts { display: flex; flex-direction: column; gap: 10px; }
+.c-alt { display: flex; align-items: center; gap: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; text-decoration: none; color: var(--white); font-size: 14px; transition: border-color 0.2s; }
+.c-alt:hover { border-color: var(--cyan); color: var(--cyan); }
+.c-alt-ic { font-size: 18px; width: 22px; text-align: center; }
+.success { display: none; text-align: center; padding: 48px 16px; }
+.success .chk { font-size: 52px; display: block; margin-bottom: 16px; }
+.success h3 { font-family: var(--serif); font-size: 24px; font-weight: 800; color: var(--cyan); margin-bottom: 12px; }
+.success p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+footer { background: #020A14; padding: 40px 48px 28px; border-top: 1px solid var(--border); }
+.foot-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; flex-wrap: wrap; margin-bottom: 28px; }
+.foot-logo { font-family: var(--serif); font-size: 18px; font-weight: 800; color: var(--cyan); margin-bottom: 8px; }
+.foot-tagline { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.foot-links { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+.foot-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.foot-links a:hover { color: var(--cyan); }
+.foot-copy { text-align: center; font-size: 11px; color: rgba(232,240,250,0.2); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+.hero .eyebrow { animation: fadeUp 0.7s ease 0.2s both; }
+.hero h1      { animation: fadeUp 0.8s ease 0.4s both; }
+.hero-sub     { animation: fadeUp 0.8s ease 0.6s both; }
+.hero-btns    { animation: fadeUp 0.8s ease 0.75s both; }
+.rev { opacity:0; transform:translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.rev.in { opacity:1; transform:translateY(0); }
+
+@media(max-width:900px){
+  nav { padding: 14px 20px; }
+  section, .lead, .partners-bar, .awards-bar, footer { padding-left: 20px; padding-right: 20px; }
+  .trust-bar { grid-template-columns: repeat(2,1fr); }
+  .why-grid, .loc-grid, .lead-wrap { grid-template-columns: 1fr; }
+  .why-badge { position: static; margin-top: 16px; display: inline-block; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .gal-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .gal-grid .g-tile:first-child { grid-column: 1/3; grid-row: auto; height: 200px; }
+  .g-tile { height: 160px; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .proc-row { grid-template-columns: repeat(2,1fr); gap: 32px; }
+  .proc-row::before { display: none; }
+  .frow { grid-template-columns: 1fr; }
+  .hero-content { padding: 0 20px 60px; }
+  .awards-bar { gap: 24px; }
+}
+
+
+/* ── RESPONSIVE STABILITY PATCH ──
+   Keeps the existing design, but prevents layout warping on tablets,
+   phones, narrow browser windows, and very wide screens. */
+img, video, iframe, svg {
+  max-width: 100%;
+}
+
+nav,
+section,
+.lead,
+.partners-bar,
+.awards-bar,
+footer,
+.hero-content {
+  width: 100%;
+}
+
+section > *,
+.lead-wrap,
+.foot-inner {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+section.gallery > *,
+section.services > *,
+section.process > *,
+section.testi > *,
+section.location > *,
+section.why > * {
+  max-width: 1200px;
+}
+
+.hero-content {
+  max-width: 960px;
+}
+
+.nav-logo,
+.svc-h3,
+.p-step h3,
+.loc-row strong,
+.lb strong,
+.why-pt strong {
+  overflow-wrap: anywhere;
+}
+
+.svc-card,
+.t-card,
+.t-big,
+.form-card,
+.why-pt,
+.loc-map,
+.g-tile,
+.trust-item {
+  min-width: 0;
+}
+
+.svc-img,
+.why-img,
+.g-tile img,
+.loc-map img {
+  max-width: 100%;
+}
+
+@media (max-width: 1180px) {
+  nav { padding: 16px 32px; }
+  section, .lead { padding: 76px 32px; }
+  .partners-bar, .awards-bar, footer { padding-left: 32px; padding-right: 32px; }
+  .why-grid, .loc-grid, .lead-wrap { gap: 40px; }
+  .svc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+  body { font-size: 15px; }
+  nav {
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .nav-right {
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .hero {
+    min-height: 760px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 11vw, 68px);
+  }
+  .hero-sub {
+    font-size: 16px;
+    max-width: 100%;
+  }
+  .trust-item {
+    padding: 26px 16px;
+  }
+  .trust-num {
+    font-size: clamp(30px, 8vw, 42px);
+  }
+  .gal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+  }
+  .gal-grid .g-tile:first-child {
+    grid-column: 1 / -1;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+  .g-tile {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .loc-map {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 640px) {
+  nav {
+    position: sticky;
+    padding: 12px 16px;
+  }
+  .nav-logo {
+    width: 100%;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  .nav-right {
+    width: 100%;
+  }
+  .nav-tel,
+  .nav-cta {
+    font-size: 12px;
+  }
+  .nav-cta {
+    padding: 9px 14px;
+  }
+  .hero {
+    min-height: 680px;
+  }
+  .hero-content {
+    padding: 0 16px 44px;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 13vw, 52px);
+    line-height: 1.02;
+  }
+  .eyebrow,
+  .s-eye,
+  .trust-lbl,
+  .p-label {
+    letter-spacing: 0.16em;
+  }
+  .hero-btns,
+  .btn-pry,
+  .btn-ghost {
+    width: 100%;
+  }
+  .btn-pry,
+  .btn-ghost {
+    text-align: center;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  section, .lead {
+    padding: 64px 16px;
+  }
+  .partners-bar,
+  .awards-bar,
+  footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .s-h2 {
+    font-size: clamp(30px, 10vw, 42px);
+  }
+  .s-lead {
+    font-size: 15px;
+    margin-bottom: 34px;
+  }
+  .trust-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+  .trust-item {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .trust-item:nth-child(odd) {
+    border-right: 1px solid var(--border);
+  }
+  .trust-item:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+  .why-pt,
+  .loc-row,
+  .lb,
+  .c-alt {
+    align-items: flex-start;
+  }
+  .svc-grid,
+  .testi-grid,
+  .proc-row,
+  .frow {
+    grid-template-columns: 1fr;
+  }
+  .svc-img {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+  .gal-grid {
+    grid-template-columns: 1fr;
+  }
+  .gal-grid .g-tile:first-child,
+  .g-tile {
+    grid-column: auto;
+    aspect-ratio: 16 / 10;
+  }
+  .logos-row {
+    gap: 18px;
+  }
+  .logos-row img {
+    height: 28px;
+    max-width: 130px;
+  }
+  .proc-row {
+    gap: 28px;
+    margin-top: 36px;
+  }
+  .p-step {
+    padding: 0;
+  }
+  .awards-bar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .aw-div {
+    display: none;
+  }
+  .loc-pin {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    transform: none;
+    white-space: normal;
+    padding: 10px 12px;
+  }
+  .form-card {
+    padding: 24px 18px;
+    border-radius: 14px;
+  }
+  .form-or::before,
+  .form-or::after {
+    width: 32%;
+  }
+  .foot-inner,
+  .foot-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 390px) {
+  .trust-bar {
+    grid-template-columns: 1fr;
+  }
+  .trust-item,
+  .trust-item:nth-child(odd) {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .trust-item:last-child {
+    border-bottom: none;
+  }
+  .hero h1 {
+    font-size: 34px;
+  }
+  .form-or::before,
+  .form-or::after {
+    width: 28%;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">COLUMBIA PICTURES AQUAVERSE</div>
+  <div class="nav-right">
+    <a href="tel:+66611596553" class="nav-tel">☎ +66 (0)61 159 6553</a>
+    <a href="#get-quote" class="nav-cta">Request Corporate Rates</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg">
+    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885d01025b283ac06fd0e3b_1.avif" alt="Corporate Family Day at Aquaverse" onerror="this.src='https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/682592671bcc9b64f7defef2_DSC03817-min.avif'">
+  </div>
+  <div class="hero-content">
+    <div class="eyebrow"><span></span>Corporate &amp; MICE Solutions</div>
+    <h1>Give Your Team<br>a Day They'll<br><span class="ac">Never Forget</span></h1>
+    <p class="hero-sub">World's first Columbia Pictures movie theme park — 90 minutes from Bangkok. Tailored corporate events from 50 to 20,000 guests.</p>
+    <div class="hero-btns">
+      <a href="#get-quote" class="btn-pry">Get a Free Corporate Proposal →</a>
+      <a href="#services" class="btn-ghost">Explore Packages</a>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-num">500+</span><span class="trust-lbl">Corporate Events Hosted</span></div>
+  <div class="trust-item"><span class="trust-num">20,000</span><span class="trust-lbl">Max Event Capacity</span></div>
+  <div class="trust-item"><span class="trust-num">4.8★</span><span class="trust-lbl">Average Client Rating</span></div>
+  <div class="trust-item"><span class="trust-num">10+</span><span class="trust-lbl">Years Experience</span></div>
+</div>
+
+<!-- WHY -->
+<section class="why rev">
+  <div class="why-grid">
+    <div class="why-img-wrap">
+      <img class="why-img" src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6883237b5c4a7d1daef7f1dd_photo_2025-07-25_13-24-50.avif" alt="Team building at Aquaverse" onerror="this.style.background='#0D2544';this.style.display='block'">
+      <div class="why-badge"><strong>#1</strong><span>Rated Corporate<br>Venue in Thailand</span></div>
+    </div>
+    <div>
+      <div class="s-eye"><span></span>Why Aquaverse</div>
+      <h2 class="s-h2">More Than a Day Out —<br>It's a <span class="ac">Story</span> Worth Telling</h2>
+      <p style="font-size:16px;font-weight:300;color:var(--muted);line-height:1.65;margin-bottom:0;">We blend Hollywood-scale immersion, world-class facilities, and full event management to create team experiences your people will talk about for years.</p>
+      <div class="why-points">
+        <div class="why-pt"><div class="w-ic">🌟</div><div><strong>World's Only Columbia Pictures Park</strong><p>Ghostbusters, Jumanji, Hotel Transylvania — a setting no ordinary venue can replicate.</p></div></div>
+        <div class="why-pt"><div class="w-ic">🎯</div><div><strong>50 to 20,000 Guests, Seamlessly</strong><p>Executive retreats to all-company family days — we scale the experience to your headcount and budget.</p></div></div>
+        <div class="why-pt"><div class="w-ic">🎬</div><div><strong>Full On-Site Event Management</strong><p>In-house planners, AV engineers, catering, and themed crew. You just show up and be the hero.</p></div></div>
+        <div class="why-pt"><div class="w-ic">🏆</div><div><strong>CNN Travel &amp; MATFA Award-Winning</strong><p>Recognised globally as one of Asia's best new theme parks. Your team will be proud you chose this.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="s-eye rev"><span></span>Our Packages</div>
+  <h2 class="s-h2 rev">Choose Your <span class="ac">Experience</span></h2>
+  <p class="s-lead rev">Every package is fully bespoke. Tell us your goals, headcount, and date — we'll build the perfect day.</p>
+  <div class="svc-grid">
+    <div class="svc-card star rev">
+      <img class="svc-img" src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885d01024ae899169379f2a_2.avif" alt="Corporate Family Day" onerror="this.style.display='none'">
+      <div class="svc-body">
+        <span class="svc-tag">Most Popular</span><span class="svc-pop">★ #1 Voted</span>
+        <h3 class="svc-h3">Corporate Family Day</h3>
+        <p class="svc-desc">A movie-magic full day for your entire team and their families — rides, shows, mascot parades, and opening ceremony.</p>
+        <ul class="svc-feats">
+          <li>Full park access for all ages</li><li>Welcome stage, PA &amp; ceremony</li><li>Live entertainment &amp; mascot shows</li><li>Reserved private group area</li><li>Cashless wristband system</li><li>Halal &amp; vegetarian dining</li><li>Free parking included</li>
+        </ul>
+      </div>
+    </div>
+    <div class="svc-card rev">
+      <img class="svc-img" src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/687a05805d5e8484b15e7089_Screenshot%202025-07-18%20152441.avif" alt="Team Building" onerror="this.style.display='none'">
+      <div class="svc-body">
+        <span class="svc-tag">Engagement</span>
+        <h3 class="svc-h3">Team Building</h3>
+        <p class="svc-desc">Thrilling water challenges and group missions that build real bonds in a setting your team will never forget.</p>
+        <ul class="svc-feats">
+          <li>Facilitated group challenges</li><li>Movie-themed missions &amp; games</li><li>Private event zones</li><li>Trophy &amp; recognition ceremony</li><li>Custom team branding</li>
+        </ul>
+      </div>
+    </div>
+    <div class="svc-card rev">
+      <img class="svc-img" src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885cee41da9335baebd7d68_1.avif" alt="Conferences" onerror="this.style.display='none'">
+      <div class="svc-body">
+        <span class="svc-tag">MICE</span>
+        <h3 class="svc-h3">Conferences &amp; Incentives</h3>
+        <p class="svc-desc">Sessions in themed zones, gourmet networking, then go-karts and rides to energise — a conference attendees remember.</p>
+        <ul class="svc-feats">
+          <li>Giant HD LED screen + Dolby DTS</li><li>Custom conference zones</li><li>Breakout activities between sessions</li><li>VIP incentive packages</li>
+        </ul>
+      </div>
+    </div>
+    <div class="svc-card rev">
+      <img class="svc-img" src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/682592671bcc9b64f7defef2_DSC03817-min.avif" alt="Corporate Retreat" onerror="this.style.display='none'">
+      <div class="svc-body">
+        <span class="svc-tag">Recharge</span>
+        <h3 class="svc-h3">Corporate Retreat</h3>
+        <p class="svc-desc">Private meetings in themed halls or poolside zones, exclusive attraction access, and sunset cocktails to close the day.</p>
+        <ul class="svc-feats">
+          <li>Poolside &amp; multi-function halls</li><li>Day club, Jacuzzi &amp; cabanas</li><li>Exclusive attraction access</li><li>Team dinners &amp; cocktail events</li>
+        </ul>
+      </div>
+    </div>
+    <div class="svc-card rev">
+      <img class="svc-img" src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6884ab3ba43bb3fbe7f9a1b4_Screenshot%202025-07-26%20171637.avif" alt="Product Launch" onerror="this.style.display='none'">
+      <div class="svc-body">
+        <span class="svc-tag">Brand Events</span>
+        <h3 class="svc-h3">Product Launches</h3>
+        <p class="svc-desc">Unveil your brand in Hollywood style — 3 giant LED screens, Dolby DTS, performers, mascots, up to 20,000 guests.</p>
+        <ul class="svc-feats">
+          <li>3× giant HD LED screens</li><li>Concert-grade Dolby DTS sound</li><li>Branded theming &amp; backdrops</li><li>Character mascots &amp; performers</li>
+        </ul>
+      </div>
+    </div>
+    <div class="svc-card rev">
+      <img class="svc-img" src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885d1277ad4f20cb5d44ecd_1.avif" alt="Galas" onerror="this.style.display='none'">
+      <div class="svc-body">
+        <span class="svc-tag">VIP Events</span>
+        <h3 class="svc-h3">Galas &amp; VIP Nights</h3>
+        <p class="svc-desc">Glamorous evenings by the Mega Wave Pool — fire shows, DJs, premium dining, fireworks, and exclusive themed zones.</p>
+        <ul class="svc-feats">
+          <li>Exclusive private venue areas</li><li>Fire shows &amp; DJ entertainment</li><li>Premium bespoke catering</li><li>Spectacular fireworks available</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" style="padding-bottom:88px;">
+  <div class="s-eye rev"><span></span>Real Events at Aquaverse</div>
+  <h2 class="s-h2 rev" style="margin-bottom:32px;">See It for <span class="ac">Yourself</span></h2>
+  <div class="gal-grid rev">
+    <div class="g-tile"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/680da4d2ae58387b8b7eb1a4_DSC08693.avif" alt="Corporate event"><span class="g-lbl">Corporate Family Day</span></div>
+    <div class="g-tile"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686347cfc3f64b12063f3265_5e8de7bf-32e9-4906-aa9d-e354fc987172-min.avif" alt="Stage show"><span class="g-lbl">Live Entertainment</span></div>
+    <div class="g-tile"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/682590a9732cdfec051e551b_WhatsApp%20Image%202025-04-28%20at%2017.32.27_cac40fe2.jpg" alt="Product launch"><span class="g-lbl">Product Launch</span></div>
+    <div class="g-tile"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885cee41a74281ef08dea0a_3.avif" alt="Conference"><span class="g-lbl">Conference &amp; Incentive</span></div>
+    <div class="g-tile"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885d12745dc217b105c2f10_2.avif" alt="Gala"><span class="g-lbl">Gala Night</span></div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<div class="partners-bar rev">
+  <p class="p-label">Trusted by Thailand's Leading Companies</p>
+  <div class="logos-row">
+    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e14494dac6699a7c46_Thai_Oil_logo.svg.avif" alt="Thai Oil">
+    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e11811776d326d409c_Ttb_bank_logo2.avif" alt="TTB Bank">
+    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e1cadf15ecbd8fb192_yamaha-motor-logo-png-transparent-removebg-preview.avif" alt="Yamaha">
+    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e0a47aef2bb40d2675_Kubota-removebg-preview.avif" alt="Kubota">
+    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83de42f1062f8a52c6df_Frasers_Property.svg" alt="Frasers Property">
+    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e1f3057f2e0cfbb321_32e8825cdcd5c83e029b8ce2ec8d9ef8-removebg-preview.avif" alt="Partner">
+    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e14494dac6699a7c2e_private-issuer-squared-87SL7.avif" alt="PTT">
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testi rev">
+  <div class="s-eye"><span></span>What Clients Say</div>
+  <h2 class="s-h2">Heard It From <span class="ac">Them First</span></h2>
+  <div class="testi-grid">
+    <div class="t-card"><div class="stars">★★★★★</div><p class="t-quote">"Best corporate family day we've ever hosted. The rides, staff, and food were fantastic. Our team is still talking about it weeks later!"</p><span class="t-who">Maya — HR Manager, Singapore MNC</span></div>
+    <div class="t-card"><div class="stars">★★★★★</div><p class="t-quote">"We hosted our KPMG ASEAN Leaders Summit here and it was extraordinary. A conference venue unlike anything we've ever used before."</p><span class="t-who">James — Events Lead, KPMG ASEAN</span></div>
+  </div>
+  <div class="t-big" style="margin-top:16px;">
+    <p>"Columbia Pictures Aquaverse is poised to set new standards for immersive entertainment in Thailand. The theme park will be a key component in our EEC Smart City development — a truly world-class destination."</p>
+    <cite>Dr. Kanit Sangsubhan — Special Advisor on Strategic Development, EEC Thailand</cite>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="process rev" style="background:var(--bg2);">
+  <div class="s-eye"><span></span>How It Works</div>
+  <h2 class="s-h2">Simple from First Call <span class="ac">to Big Day</span></h2>
+  <p class="s-lead">Our dedicated corporate team handles every detail. You just show up and be the hero.</p>
+  <div class="proc-row">
+    <div class="p-step"><div class="p-num">1</div><h3>Tell Us Your Vision</h3><p>Share your goals, group size, date, and budget — no detail too big or small.</p></div>
+    <div class="p-step"><div class="p-num">2</div><h3>We Design Your Day</h3><p>Our team builds a fully bespoke proposal — activities, catering, entertainment, branding.</p></div>
+    <div class="p-step"><div class="p-num">3</div><h3>We Handle Everything</h3><p>From setup to showtime. Our crew, planners, AV engineers, and caterers are on-site.</p></div>
+    <div class="p-step"><div class="p-num">4</div><h3>You Take the Credit</h3><p>Your team has the day of their lives. You look like a genius. Everyone goes home smiling.</p></div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<div class="awards-bar rev">
+  <div class="aw"><span class="aw-name">TripAdvisor Travellers' Choice</span><span class="aw-sub">2020 Award Winner</span></div>
+  <div class="aw-div"></div>
+  <div class="aw"><span class="aw-name">MATFA Golden House Award</span><span class="aw-sub">Best ASEAN Themed Park 2025</span></div>
+  <div class="aw-div"></div>
+  <div class="aw"><span class="aw-name">iTrip.Best Global 100</span><span class="aw-sub">2025 Recognition</span></div>
+  <div class="aw-div"></div>
+  <div class="aw"><span class="aw-name">CNN Travel</span><span class="aw-sub">World's Best New Theme Parks</span></div>
+</div>
+
+<!-- LOCATION -->
+<section class="location rev">
+  <div class="loc-grid">
+    <div>
+      <div class="s-eye"><span></span>Getting Here</div>
+      <h2 class="s-h2">Easy to Reach<br>from <span class="ac">Bangkok</span></h2>
+      <p class="s-lead" style="margin-bottom:28px;">Convenient for corporate groups from Bangkok, Pattaya, or arriving internationally.</p>
+      <div class="loc-rows">
+        <div class="loc-row"><span class="loc-ic">⏱</span><div><strong>90 minutes from Bangkok</strong><p>Highway access from Suvarnabhumi Airport and central Bangkok</p></div></div>
+        <div class="loc-row"><span class="loc-ic">⏱</span><div><strong>20 minutes from Pattaya</strong><p>Ideal add-on for MICE groups already visiting Pattaya</p></div></div>
+        <div class="loc-row"><span class="loc-ic">🅿</span><div><strong>Free parking for all guests</strong><p>Coaches, vans, and private vehicles — always included</p></div></div>
+        <div class="loc-row"><span class="loc-ic">🕙</span><div><strong>Open daily 10AM – 6PM</strong><p>Closed Wednesdays. Special event hours available on request.</p></div></div>
+        <div class="loc-row"><span class="loc-ic">📍</span><div><strong>888 Moo 8, Na Jomtien, Sattahip, Chonburi 20250</strong><p>Thailand's Eastern Economic Corridor</p></div></div>
+      </div>
+    </div>
+    <div class="loc-map">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/68259a5bdec8e111575a5a87_67da7a45233be3d59780002c_635a0b9a0983494e85686854_cv.avif" alt="Aquaverse park view" onerror="this.style.background='#0D2544'">
+      <div class="loc-pin">📍 Columbia Pictures Aquaverse · Chonburi, Thailand</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LEAD CAPTURE FORM ── -->
+<section class="lead" id="get-quote">
+  <div class="lead-wrap">
+    <div class="lead-left">
+      <div class="s-eye"><span></span>Get Your Free Proposal</div>
+      <h2 class="s-h2">Let's Plan Your<br><span class="ac">Perfect Corporate Day</span></h2>
+      <p class="s-lead" style="margin-bottom:28px;">Fill in the form and our dedicated corporate team will come back to you within 24 hours with a tailored proposal and pricing — completely free, no obligation.</p>
+      <div class="lead-bens">
+        <div class="lb"><div class="lb-ic">⚡</div><div><strong>Response within 24 hours</strong><p>Our corporate team is available 7 days a week.</p></div></div>
+        <div class="lb"><div class="lb-ic">📋</div><div><strong>Fully bespoke proposal</strong><p>Built around your headcount, goals, and budget — not a template.</p></div></div>
+        <div class="lb"><div class="lb-ic">💰</div><div><strong>Exclusive corporate group rates</strong><p>Different to retail tickets. Volume pricing for your whole team.</p></div></div>
+        <div class="lb"><div class="lb-ic">🎬</div><div><strong>Full event management included</strong><p>We handle everything so your HR team can relax.</p></div></div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div id="form-inner">
+        <h3 class="form-h">Request Your Free Proposal</h3>
+        <p class="form-sub">We'll respond within 24 hours with tailored options and pricing.</p>
+
+        <div class="frow">
+          <div class="fld"><label>First Name *</label><input type="text" placeholder="Sarah" id="fname"></div>
+          <div class="fld"><label>Last Name *</label><input type="text" placeholder="Johnson" id="lname"></div>
+        </div>
+        <div class="frow">
+          <div class="fld"><label>Work Email *</label><input type="email" placeholder="sarah@company.com" id="email"></div>
+          <div class="fld"><label>Phone / WhatsApp *</label><input type="tel" placeholder="+66 xxx xxx xxxx" id="phone"></div>
+        </div>
+        <div class="frow">
+          <div class="fld"><label>Company Name *</label><input type="text" placeholder="Acme Corporation" id="company"></div>
+          <div class="fld"><label>Your Role</label><input type="text" placeholder="HR Manager / Events Lead" id="role"></div>
+        </div>
+        <div class="frow">
+          <div class="fld">
+            <label>Type of Event *</label>
+            <select id="event-type">
+              <option value="" disabled selected>Select package...</option>
+              <option>Corporate Family Day</option>
+              <option>Team Building</option>
+              <option>Conference / Incentive</option>
+              <option>Corporate Retreat</option>
+              <option>Product Launch</option>
+              <option>Gala / VIP Night</option>
+              <option>School Group</option>
+              <option>Birthday / Celebration</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label>Estimated Group Size *</label>
+            <select id="group-size">
+              <option value="" disabled selected>Number of guests...</option>
+              <option>50 – 100</option>
+              <option>101 – 300</option>
+              <option>301 – 500</option>
+              <option>501 – 1,000</option>
+              <option>1,001 – 5,000</option>
+              <option>5,000+</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fld"><label>Preferred Date / Month</label><input type="text" placeholder="e.g. November 2025 or flexible" id="date"></div>
+          <div class="fld">
+            <label>Approximate Budget (THB)</label>
+            <select id="budget">
+              <option value="" disabled selected>Budget range...</option>
+              <option>Under ฿100,000</option>
+              <option>฿100,000 – ฿300,000</option>
+              <option>฿300,000 – ฿700,000</option>
+              <option>฿700,000 – ฿2,000,000</option>
+              <option>฿2,000,000+</option>
+              <option>To be confirmed</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow one">
+          <div class="fld"><label>Anything else we should know?</label><textarea placeholder="Special requirements, dietary needs, entertainment preferences, accessibility..." id="message"></textarea></div>
+        </div>
+
+        <button class="form-btn" onclick="handleSubmit(event)">Send My Free Proposal Request →</button>
+        <p class="form-note">We respect your privacy. Your details are only used to prepare your proposal and will never be shared or sold.</p>
+
+        <div class="form-or">or reach us directly</div>
+        <div class="c-alts">
+          <a href="tel:+66611596553" class="c-alt"><span class="c-alt-ic">📞</span>Call / WhatsApp: +66 (0)61 159 6553</a>
+          <a href="mailto:info@columbiapicturesaquaverse.com?subject=Corporate%20Event%20Enquiry" class="c-alt"><span class="c-alt-ic">✉️</span>info@columbiapicturesaquaverse.com</a>
+        </div>
+      </div>
+
+      <div class="success" id="success-msg">
+        <span class="chk">🎬</span>
+        <h3>Proposal Request Sent!</h3>
+        <p>Thank you! Our corporate events team will be in touch within <strong style="color:var(--cyan)">24 hours</strong> with a tailored proposal for your team.<br><br>Want to talk sooner? Call us on <strong style="color:var(--cyan)">+66 (0)61 159 6553</strong> anytime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <div>
+      <div class="foot-logo">Columbia Pictures Aquaverse</div>
+      <p class="foot-tagline">World's First Columbia Pictures Movie Theme Park<br>888 Moo 8, Na Jomtien, Sattahip, Chonburi 20250, Thailand<br>Open daily 10AM–6PM · Closed Wednesdays</p>
+    </div>
+    <div class="foot-links">
+      <a href="https://www.aquaversepark.com/" target="_blank">Website</a>
+      <a href="https://www.aquaversepark.com/attractions" target="_blank">Attractions</a>
+      <a href="https://www.aquaversepark.com/corporate" target="_blank">Corporate</a>
+      <a href="https://www.aquaversepark.com/faq" target="_blank">FAQs</a>
+      <a href="mailto:info@columbiapicturesaquaverse.com">Email Us</a>
+      <a href="tel:+6633004999">+66(0)33 004 999</a>
+    </div>
+  </div>
+  <p class="foot-copy">© 2025 Columbia Pictures Location Based Entertainment Inc. All Rights Reserved · A Sony Pictures Entertainment Partnership</p>
+</footer>
+
+<script>
+  const revEls = document.querySelectorAll('.rev');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  revEls.forEach(r => io.observe(r));
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const company = document.getElementById('company').value.trim();
+    if (!fname || !email || !phone || !company) {
+      alert('Please fill in your name, work email, phone, and company name to continue.');
+      return;
+    }
+    const btn = e.target;
+    btn.textContent = 'Sending your request...';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('form-inner').style.display = 'none';
+      const s = document.getElementById('success-msg');
+      s.style.display = 'block';
+    }, 1000);
+  }
+</script>
+</body>
+</html>
