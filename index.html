@@ -583,6 +583,25 @@ section.why > * {
   }
 }
 
+
+
+/* ── LANGUAGE SWITCHER ADD-ON ── */
+.lang-select {
+  background: rgba(13,37,68,0.92);
+  color: var(--white);
+  border: 1px solid rgba(0,194,255,0.35);
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-family: var(--sans);
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  min-width: 112px;
+}
+.lang-select:focus { border-color: var(--cyan); }
+.lang-select option { background: var(--bg2); color: var(--white); }
+@media (max-width: 640px) { .lang-select { width: 100%; } }
+
 </style>
 </head>
 <body>
@@ -590,6 +609,10 @@ section.why > * {
 <nav>
   <div class="nav-logo">COLUMBIA PICTURES AQUAVERSE</div>
   <div class="nav-right">
+    <select id="languageSelect" class="lang-select" aria-label="Select language">
+      <option value="en">English</option>
+      <option value="th">ไทย</option>
+    </select>
     <a href="tel:+66611596553" class="nav-tel">☎ +66 (0)61 159 6553</a>
     <a href="#get-quote" class="nav-cta">Request Corporate Rates</a>
   </div>
@@ -822,101 +845,61 @@ section.why > * {
     <h3 class="form-h">Request Your Free Proposal</h3>
     <p class="form-sub">We'll respond within 24 hours with tailored options and pricing.</p>
 
-    <form action="https://formspree.io/f/maqvqapk" method="POST">
+    <form id="proposalForm" action="https://formspree.io/f/maqvqapk" method="POST">
       <div class="frow">
         <div class="fld">
-          <label for="fname">First Name *</label>
-          <input type="text" placeholder="Sarah" id="fname" name="First Name" required>
+          <label for="fname">First name *</label>
+          <input type="text" id="fname" name="First Name" required>
         </div>
 
         <div class="fld">
-          <label for="lname">Last Name *</label>
-          <input type="text" placeholder="Johnson" id="lname" name="Last Name" required>
+          <label for="lname">Last name</label>
+          <input type="text" id="lname" name="Last Name">
         </div>
       </div>
 
-      <div class="frow">
+      <div class="frow one">
         <div class="fld">
-          <label for="email">Work Email *</label>
-          <input type="email" placeholder="sarah@company.com" id="email" name="Work Email" required>
-        </div>
-
-        <div class="fld">
-          <label for="phone">Phone / WhatsApp *</label>
-          <input type="tel" placeholder="+66 xxx xxx xxxx" id="phone" name="Phone / WhatsApp" required>
+          <label for="company">Company name</label>
+          <input type="text" id="company" name="Company Name">
         </div>
       </div>
 
-      <div class="frow">
+      <div class="frow one">
         <div class="fld">
-          <label for="company">Company Name *</label>
-          <input type="text" placeholder="Acme Corporation" id="company" name="Company Name" required>
-        </div>
-
-        <div class="fld">
-          <label for="role">Your Role</label>
-          <input type="text" placeholder="HR Manager / Events Lead" id="role" name="Your Role">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="Email" required>
         </div>
       </div>
 
-      <div class="frow">
+      <div class="frow one">
         <div class="fld">
-          <label for="event-type">Type of Event *</label>
-          <select id="event-type" name="Type of Event" required>
-            <option value="" disabled selected>Select package...</option>
-            <option>Corporate Family Day</option>
-            <option>Team Building</option>
-            <option>Conference / Incentive</option>
-            <option>Corporate Retreat</option>
-            <option>Product Launch</option>
-            <option>Gala / VIP Night</option>
-            <option>School Group</option>
-            <option>Birthday / Celebration</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-
-        <div class="fld">
-          <label for="group-size">Estimated Group Size *</label>
-          <select id="group-size" name="Estimated Group Size" required>
-            <option value="" disabled selected>Number of guests...</option>
-            <option>50 – 100</option>
-            <option>101 – 300</option>
-            <option>301 – 500</option>
-            <option>501 – 1,000</option>
-            <option>1,001 – 5,000</option>
-            <option>5,000+</option>
-          </select>
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" name="Phone Number">
         </div>
       </div>
 
-      <div class="frow">
+      <div class="frow one">
         <div class="fld">
-          <label for="date">Preferred Date / Month</label>
-          <input type="text" placeholder="e.g. November 2025 or flexible" id="date" name="Preferred Date / Month">
-        </div>
-
-        <div class="fld">
-          <label for="budget">Approximate Budget (THB)</label>
-          <select id="budget" name="Approximate Budget (THB)">
-            <option value="" disabled selected>Budget range...</option>
-            <option>Under ฿100,000</option>
-            <option>฿100,000 – ฿300,000</option>
-            <option>฿300,000 – ฿700,000</option>
-            <option>฿700,000 – ฿2,000,000</option>
-            <option>฿2,000,000+</option>
-            <option>To be confirmed</option>
+          <label for="employees">Number of employees *</label>
+          <select id="employees" name="Number of Employees" required>
+            <option value="" disabled selected>Select number of employees...</option>
+            <option>1-50</option>
+            <option>51-100</option>
+            <option>101-250</option>
+            <option>251-500</option>
+            <option>500-1000+</option>
+            <option>1000+</option>
           </select>
         </div>
       </div>
 
       <div class="frow one">
         <div class="fld">
-          <label for="message">Anything else we should know?</label>
+          <label for="message">Any other requirements</label>
           <textarea
-            placeholder="Special requirements, dietary needs, entertainment preferences, accessibility..."
             id="message"
-            name="Anything else we should know?"
+            name="Any other requirements"
           ></textarea>
         </div>
       </div>
@@ -946,7 +929,15 @@ section.why > * {
       </a>
     </div>
   </div>
+
+  <div id="success-msg" class="success" aria-live="polite">
+    <span class="chk">✓</span>
+    <h3>Submitted</h3>
+    <p>Thank you. Your proposal request has been submitted successfully. Our corporate team will contact you within 24 hours.</p>
+  </div>
 </div>
+</div>
+</section>
 
 <footer>
   <div class="foot-inner">
@@ -966,6 +957,284 @@ section.why > * {
   <p class="foot-copy">© 2025 Columbia Pictures Location Based Entertainment Inc. All Rights Reserved · A Sony Pictures Entertainment Partnership</p>
 </footer>
 
+
+<script>
+  /* ── LANGUAGE SWITCHER ADD-ON: English + Thai ──
+     This keeps your existing HTML structure unchanged and translates visible text,
+     form labels, select options, placeholders, buttons, and footer copy. */
+  const i18n = {
+    th: {
+      "COLUMBIA PICTURES AQUAVERSE": "โคลัมเบีย พิคเจอร์ส อควาเวิร์ส",
+      "Request Corporate Rates": "ขอเรทราคาสำหรับองค์กร",
+      "Corporate & MICE Solutions": "โซลูชันสำหรับองค์กรและงานไมซ์",
+      "Give Your Team": "มอบวันพิเศษให้ทีมของคุณ",
+      "a Day They'll": "เป็นวันที่พวกเขา",
+      "Never Forget": "จะไม่มีวันลืม",
+      "World's first Columbia Pictures movie theme park — 90 minutes from Bangkok. Tailored corporate events from 50 to 20,000 guests.": "สวนน้ำธีมภาพยนตร์ Columbia Pictures แห่งแรกของโลก — เพียง 90 นาทีจากกรุงเทพฯ พร้อมออกแบบอีเวนต์องค์กรสำหรับแขกตั้งแต่ 50 ถึง 20,000 คน",
+      "Get a Free Corporate Proposal →": "ขอข้อเสนอสำหรับองค์กรฟรี →",
+      "Explore Packages": "ดูแพ็กเกจ",
+      "Corporate Events Hosted": "อีเวนต์องค์กรที่จัดมาแล้ว",
+      "Max Event Capacity": "รองรับแขกได้สูงสุด",
+      "Average Client Rating": "คะแนนเฉลี่ยจากลูกค้า",
+      "Years Experience": "ปีแห่งประสบการณ์",
+      "Rated Corporate": "สถานที่จัดงานองค์กร",
+      "Venue in Thailand": "ยอดนิยมในประเทศไทย",
+      "Why Aquaverse": "ทำไมต้อง Aquaverse",
+      "More Than a Day Out —": "ไม่ใช่แค่วันพักผ่อน —",
+      "It's a": "แต่คือ",
+      "Story": "เรื่องราว",
+      "Worth Telling": "ที่ควรค่าแก่การจดจำ",
+      "We blend Hollywood-scale immersion, world-class facilities, and full event management to create team experiences your people will talk about for years.": "เราผสานประสบการณ์ระดับฮอลลีวูด สิ่งอำนวยความสะดวกระดับสากล และการจัดการอีเวนต์ครบวงจร เพื่อสร้างวันพิเศษที่ทีมของคุณจะพูดถึงไปอีกนาน",
+      "World's Only Columbia Pictures Park": "สวนสนุก Columbia Pictures แห่งเดียวในโลก",
+      "Ghostbusters, Jumanji, Hotel Transylvania — a setting no ordinary venue can replicate.": "Ghostbusters, Jumanji, Hotel Transylvania — บรรยากาศที่สถานที่ทั่วไปไม่สามารถเลียนแบบได้",
+      "50 to 20,000 Guests, Seamlessly": "รองรับแขก 50 ถึง 20,000 คนได้อย่างราบรื่น",
+      "Executive retreats to all-company family days — we scale the experience to your headcount and budget.": "ตั้งแต่ทริปผู้บริหารไปจนถึงงาน Family Day ทั้งบริษัท — เราปรับประสบการณ์ให้เหมาะกับจำนวนแขกและงบประมาณของคุณ",
+      "Full On-Site Event Management": "ทีมจัดการอีเวนต์ครบวงจรภายในสถานที่",
+      "In-house planners, AV engineers, catering, and themed crew. You just show up and be the hero.": "มีทีมวางแผน ทีมระบบแสงเสียงและภาพ ทีมอาหาร และทีมธีมอีเวนต์ในสถานที่ คุณเพียงพาทีมมา แล้วปล่อยให้เราจัดการทุกอย่าง",
+      "CNN Travel & MATFA Award-Winning": "ได้รับรางวัลและการยอมรับจาก CNN Travel และ MATFA",
+      "Recognised globally as one of Asia's best new theme parks. Your team will be proud you chose this.": "ได้รับการยอมรับในระดับนานาชาติว่าเป็นหนึ่งในสวนสนุกใหม่ที่ดีที่สุดของเอเชีย ทีมของคุณจะภูมิใจที่คุณเลือกที่นี่",
+      "Our Packages": "แพ็กเกจของเรา",
+      "Choose Your": "เลือก",
+      "Experience": "ประสบการณ์",
+      "Every package is fully bespoke. Tell us your goals, headcount, and date — we'll build the perfect day.": "ทุกแพ็กเกจสามารถปรับแต่งได้ตามความต้องการ แจ้งเป้าหมาย จำนวนผู้เข้าร่วม และวันที่ต้องการ แล้วเราจะออกแบบวันพิเศษให้เหมาะกับคุณ",
+      "Most Popular": "ยอดนิยมที่สุด",
+      "★ #1 Voted": "★ อันดับ 1",
+      "Corporate Family Day": "งาน Corporate Family Day",
+      "A movie-magic full day for your entire team and their families — rides, shows, mascot parades, and opening ceremony.": "วันเต็มแห่งมนต์เสน่ห์ภาพยนตร์สำหรับทีมงานและครอบครัว พร้อมเครื่องเล่น โชว์ ขบวนมาสคอต และพิธีเปิดงาน",
+      "Full park access for all ages": "เข้าใช้สวนน้ำได้เต็มวันสำหรับทุกวัย",
+      "Welcome stage, PA & ceremony": "เวทีต้อนรับ ระบบเสียง และพิธีเปิด",
+      "Live entertainment & mascot shows": "ความบันเทิงสดและโชว์มาสคอต",
+      "Reserved private group area": "พื้นที่ส่วนตัวสำหรับกลุ่มของคุณ",
+      "Cashless wristband system": "ระบบสายรัดข้อมือแบบไร้เงินสด",
+      "Halal & vegetarian dining": "อาหารฮาลาลและมังสวิรัติ",
+      "Free parking included": "รวมที่จอดรถฟรี",
+      "Engagement": "สร้างการมีส่วนร่วม",
+      "Team Building": "ทีมบิลดิ้ง",
+      "Thrilling water challenges and group missions that build real bonds in a setting your team will never forget.": "กิจกรรมทางน้ำและภารกิจกลุ่มสุดตื่นเต้น ที่ช่วยสร้างความสัมพันธ์จริงในบรรยากาศที่ทีมของคุณจะไม่มีวันลืม",
+      "Facilitated group challenges": "กิจกรรมกลุ่มพร้อมทีมดูแล",
+      "Movie-themed missions & games": "ภารกิจและเกมธีมภาพยนตร์",
+      "Private event zones": "โซนจัดงานส่วนตัว",
+      "Trophy & recognition ceremony": "พิธีมอบรางวัลและประกาศเกียรติคุณ",
+      "Custom team branding": "ออกแบบแบรนด์ดิ้งสำหรับทีมของคุณ",
+      "MICE": "ไมซ์",
+      "Conferences & Incentives": "งานประชุมและอินเซนทีฟ",
+      "Sessions in themed zones, gourmet networking, then go-karts and rides to energise — a conference attendees remember.": "จัดประชุมในโซนธีมพิเศษ ต่อด้วยอาหารและเน็ตเวิร์กกิ้ง แล้วเพิ่มพลังด้วยโกคาร์ทและเครื่องเล่น เป็นงานประชุมที่ผู้เข้าร่วมจะจดจำ",
+      "Giant HD LED screen + Dolby DTS": "จอ LED HD ขนาดใหญ่ + ระบบเสียง Dolby DTS",
+      "Custom conference zones": "โซนประชุมที่ปรับแต่งได้",
+      "Breakout activities between sessions": "กิจกรรมคั่นระหว่างช่วงประชุม",
+      "VIP incentive packages": "แพ็กเกจอินเซนทีฟแบบ VIP",
+      "Recharge": "รีชาร์จทีม",
+      "Corporate Retreat": "คอร์ปอเรตรีทรีต",
+      "Private meetings in themed halls or poolside zones, exclusive attraction access, and sunset cocktails to close the day.": "ประชุมส่วนตัวในห้องธีมหรือโซนริมสระ พร้อมสิทธิ์เข้าใช้เครื่องเล่นแบบพิเศษ และค็อกเทลยามเย็นปิดท้ายวัน",
+      "Poolside & multi-function halls": "โซนริมสระและห้องอเนกประสงค์",
+      "Day club, Jacuzzi & cabanas": "เดย์คลับ จากุซซี่ และคาบาน่า",
+      "Exclusive attraction access": "สิทธิ์เข้าใช้เครื่องเล่นแบบพิเศษ",
+      "Team dinners & cocktail events": "ดินเนอร์ทีมและงานค็อกเทล",
+      "Brand Events": "อีเวนต์แบรนด์",
+      "Product Launches": "งานเปิดตัวสินค้า",
+      "Unveil your brand in Hollywood style — 3 giant LED screens, Dolby DTS, performers, mascots, up to 20,000 guests.": "เปิดตัวแบรนด์ของคุณในสไตล์ฮอลลีวูด พร้อมจอ LED ขนาดใหญ่ 3 จอ ระบบเสียง Dolby DTS นักแสดง มาสคอต และรองรับแขกได้สูงสุด 20,000 คน",
+      "3× giant HD LED screens": "จอ LED HD ขนาดใหญ่ 3 จอ",
+      "Concert-grade Dolby DTS sound": "ระบบเสียง Dolby DTS ระดับคอนเสิร์ต",
+      "Branded theming & backdrops": "ธีมและฉากหลังตามแบรนด์",
+      "Character mascots & performers": "มาสคอตตัวละครและนักแสดง",
+      "VIP Events": "อีเวนต์ VIP",
+      "Galas & VIP Nights": "งานกาล่าและ VIP Night",
+      "Glamorous evenings by the Mega Wave Pool — fire shows, DJs, premium dining, fireworks, and exclusive themed zones.": "ค่ำคืนสุดหรูริม Mega Wave Pool พร้อมโชว์ไฟ ดีเจ อาหารพรีเมียม พลุ และโซนธีมสุดพิเศษ",
+      "Exclusive private venue areas": "พื้นที่จัดงานส่วนตัวแบบเอ็กซ์คลูซีฟ",
+      "Fire shows & DJ entertainment": "โชว์ไฟและความบันเทิงจากดีเจ",
+      "Premium bespoke catering": "บริการอาหารพรีเมียมแบบปรับแต่งได้",
+      "Spectacular fireworks available": "สามารถจัดโชว์พลุสุดตระการตาได้",
+      "Real Events at Aquaverse": "อีเวนต์จริงที่ Aquaverse",
+      "See It for": "มาชมด้วย",
+      "Yourself": "ตัวคุณเอง",
+      "Live Entertainment": "ความบันเทิงสด",
+      "Product Launch": "งานเปิดตัวสินค้า",
+      "Conference & Incentive": "งานประชุมและอินเซนทีฟ",
+      "Gala Night": "งานกาล่าไนท์",
+      "Trusted by Thailand's Leading Companies": "ได้รับความไว้วางใจจากบริษัทชั้นนำของประเทศไทย",
+      "What Clients Say": "เสียงจากลูกค้า",
+      "Heard It From": "ฟังจาก",
+      "Them First": "ลูกค้าของเรา",
+      "\"Best corporate family day we've ever hosted. The rides, staff, and food were fantastic. Our team is still talking about it weeks later!\"": "\"เป็นงาน Corporate Family Day ที่ดีที่สุดที่เราเคยจัดมา เครื่องเล่น พนักงาน และอาหารยอดเยี่ยมมาก ทีมของเรายังพูดถึงงานนี้แม้ผ่านไปหลายสัปดาห์แล้ว!\"",
+      "Maya — HR Manager, Singapore MNC": "Maya — ผู้จัดการฝ่าย HR, บริษัทข้ามชาติจากสิงคโปร์",
+      "\"We hosted our KPMG ASEAN Leaders Summit here and it was extraordinary. A conference venue unlike anything we've ever used before.\"": "\"เราได้จัดงาน KPMG ASEAN Leaders Summit ที่นี่ และมันยอดเยี่ยมมาก เป็นสถานที่ประชุมที่แตกต่างจากทุกที่ที่เราเคยใช้มา\"",
+      "James — Events Lead, KPMG ASEAN": "James — หัวหน้าทีมอีเวนต์, KPMG ASEAN",
+      "\"Columbia Pictures Aquaverse is poised to set new standards for immersive entertainment in Thailand. The theme park will be a key component in our EEC Smart City development — a truly world-class destination.\"": "\"Columbia Pictures Aquaverse พร้อมที่จะสร้างมาตรฐานใหม่ให้กับความบันเทิงแบบอินเมอร์ซีฟในประเทศไทย สวนสนุกแห่งนี้จะเป็นองค์ประกอบสำคัญของการพัฒนา EEC Smart City — เป็นจุดหมายปลายทางระดับโลกอย่างแท้จริง\"",
+      "Dr. Kanit Sangsubhan — Special Advisor on Strategic Development, EEC Thailand": "ดร. คณิศ แสงสุพรรณ — ที่ปรึกษาพิเศษด้านการพัฒนาเชิงยุทธศาสตร์, EEC Thailand",
+      "How It Works": "ขั้นตอนการทำงาน",
+      "Simple from First Call": "ง่ายตั้งแต่การติดต่อครั้งแรก",
+      "to Big Day": "จนถึงวันงานจริง",
+      "Our dedicated corporate team handles every detail. You just show up and be the hero.": "ทีมองค์กรของเราดูแลทุกรายละเอียด คุณเพียงมาถึงงานและเป็นฮีโร่ของทีม",
+      "Tell Us Your Vision": "บอกวิสัยทัศน์ของคุณ",
+      "Share your goals, group size, date, and budget — no detail too big or small.": "แจ้งเป้าหมาย จำนวนผู้เข้าร่วม วันที่ และงบประมาณ — ไม่มีรายละเอียดใดเล็กหรือใหญ่เกินไป",
+      "We Design Your Day": "เราออกแบบวันของคุณ",
+      "Our team builds a fully bespoke proposal — activities, catering, entertainment, branding.": "ทีมของเราจะสร้างข้อเสนอที่ปรับแต่งเฉพาะคุณ ทั้งกิจกรรม อาหาร ความบันเทิง และแบรนด์ดิ้ง",
+      "We Handle Everything": "เราดูแลทุกอย่าง",
+      "From setup to showtime. Our crew, planners, AV engineers, and caterers are on-site.": "ตั้งแต่การเตรียมงานจนถึงวันจริง ทีมงาน ผู้วางแผน วิศวกรระบบ AV และทีมอาหารของเราอยู่ในสถานที่",
+      "You Take the Credit": "คุณรับเครดิตความสำเร็จ",
+      "Your team has the day of their lives. You look like a genius. Everyone goes home smiling.": "ทีมของคุณได้มีวันที่ยอดเยี่ยม คุณดูเหมือนอัจฉริยะ และทุกคนกลับบ้านพร้อมรอยยิ้ม",
+      "TripAdvisor Travellers' Choice": "TripAdvisor Travellers' Choice",
+      "2020 Award Winner": "ผู้ได้รับรางวัลปี 2020",
+      "MATFA Golden House Award": "MATFA Golden House Award",
+      "Best ASEAN Themed Park 2025": "สวนสนุกธีมยอดเยี่ยมของอาเซียน ปี 2025",
+      "iTrip.Best Global 100": "iTrip.Best Global 100",
+      "2025 Recognition": "การยอมรับประจำปี 2025",
+      "CNN Travel": "CNN Travel",
+      "World's Best New Theme Parks": "หนึ่งในสวนสนุกใหม่ที่ดีที่สุดของโลก",
+      "Getting Here": "การเดินทาง",
+      "Easy to Reach": "เดินทางสะดวก",
+      "from": "จาก",
+      "Bangkok": "กรุงเทพฯ",
+      "Convenient for corporate groups from Bangkok, Pattaya, or arriving internationally.": "สะดวกสำหรับกลุ่มองค์กรจากกรุงเทพฯ พัทยา หรือกลุ่มที่เดินทางมาจากต่างประเทศ",
+      "90 minutes from Bangkok": "90 นาทีจากกรุงเทพฯ",
+      "Highway access from Suvarnabhumi Airport and central Bangkok": "เดินทางสะดวกผ่านทางหลวงจากสนามบินสุวรรณภูมิและใจกลางกรุงเทพฯ",
+      "20 minutes from Pattaya": "20 นาทีจากพัทยา",
+      "Ideal add-on for MICE groups already visiting Pattaya": "เหมาะสำหรับเพิ่มเป็นกิจกรรมเสริมสำหรับกลุ่มไมซ์ที่เดินทางมาพัทยาอยู่แล้ว",
+      "Free parking for all guests": "ที่จอดรถฟรีสำหรับแขกทุกท่าน",
+      "Coaches, vans, and private vehicles — always included": "รองรับรถบัส รถตู้ และรถส่วนตัว — รวมอยู่แล้วเสมอ",
+      "Open daily 10AM – 6PM": "เปิดทุกวัน 10:00–18:00 น.",
+      "Closed Wednesdays. Special event hours available on request.": "ปิดทุกวันพุธ สามารถขอเวลาเปิดพิเศษสำหรับอีเวนต์ได้",
+      "888 Moo 8, Na Jomtien, Sattahip, Chonburi 20250": "888 หมู่ 8 นาจอมเทียน สัตหีบ ชลบุรี 20250",
+      "Thailand's Eastern Economic Corridor": "เขตพัฒนาพิเศษภาคตะวันออกของประเทศไทย",
+      "📍 Columbia Pictures Aquaverse · Chonburi, Thailand": "📍 Columbia Pictures Aquaverse · ชลบุรี ประเทศไทย",
+      "Get Your Free Proposal": "รับข้อเสนอฟรี",
+      "Let's Plan Your": "ให้เราช่วยวางแผน",
+      "Perfect Corporate Day": "วันองค์กรที่สมบูรณ์แบบของคุณ",
+      "Fill in the form and our dedicated corporate team will come back to you within 24 hours with a tailored proposal and pricing — completely free, no obligation.": "กรอกแบบฟอร์ม แล้วทีมองค์กรของเราจะติดต่อกลับภายใน 24 ชั่วโมง พร้อมข้อเสนอและราคาที่ปรับให้เหมาะกับคุณ ฟรีทั้งหมดและไม่มีข้อผูกมัด",
+      "Response within 24 hours": "ตอบกลับภายใน 24 ชั่วโมง",
+      "Our corporate team is available 7 days a week.": "ทีมองค์กรของเราพร้อมให้บริการ 7 วันต่อสัปดาห์",
+      "Fully bespoke proposal": "ข้อเสนอที่ปรับแต่งเฉพาะคุณ",
+      "Built around your headcount, goals, and budget — not a template.": "ออกแบบตามจำนวนคน เป้าหมาย และงบประมาณของคุณ ไม่ใช่ข้อเสนอสำเร็จรูป",
+      "Exclusive corporate group rates": "เรทราคาพิเศษสำหรับกลุ่มองค์กร",
+      "Different to retail tickets. Volume pricing for your whole team.": "แตกต่างจากราคาบัตรทั่วไป พร้อมราคาตามจำนวนสำหรับทั้งทีมของคุณ",
+      "Full event management included": "รวมบริการจัดการอีเวนต์ครบวงจร",
+      "We handle everything so your HR team can relax.": "เราดูแลทุกอย่าง เพื่อให้ทีม HR ของคุณผ่อนคลายได้",
+      "Request Your Free Proposal": "ขอข้อเสนอฟรีของคุณ",
+      "We'll respond within 24 hours with tailored options and pricing.": "เราจะตอบกลับภายใน 24 ชั่วโมง พร้อมตัวเลือกและราคาที่เหมาะกับคุณ",
+      "First Name *": "ชื่อ *",
+      "Last Name *": "นามสกุล *",
+      "Work Email *": "อีเมลบริษัท *",
+      "Phone / WhatsApp *": "โทรศัพท์ / WhatsApp *",
+      "Company Name *": "ชื่อบริษัท *",
+      "Your Role": "ตำแหน่งของคุณ",
+      "Type of Event *": "ประเภทอีเวนต์ *",
+      "Estimated Group Size *": "จำนวนผู้เข้าร่วมโดยประมาณ *",
+      "Preferred Date / Month": "วันที่ / เดือนที่ต้องการ",
+      "Approximate Budget (THB)": "งบประมาณโดยประมาณ (บาท)",
+      "Anything else we should know?": "มีรายละเอียดอื่นที่เราควรรู้ไหม?",
+      "Select package...": "เลือกแพ็กเกจ...",
+      "Conference / Incentive": "งานประชุม / อินเซนทีฟ",
+      "Gala / VIP Night": "งานกาล่า / VIP Night",
+      "School Group": "กลุ่มโรงเรียน",
+      "Birthday / Celebration": "วันเกิด / งานเฉลิมฉลอง",
+      "Not sure yet": "ยังไม่แน่ใจ",
+      "Number of guests...": "จำนวนแขก...",
+      "Under ฿100,000": "ต่ำกว่า ฿100,000",
+      "฿100,000 – ฿300,000": "฿100,000 – ฿300,000",
+      "฿300,000 – ฿700,000": "฿300,000 – ฿700,000",
+      "฿700,000 – ฿2,000,000": "฿700,000 – ฿2,000,000",
+      "฿2,000,000+": "฿2,000,000+",
+      "To be confirmed": "ยังไม่ยืนยัน",
+      "Budget range...": "ช่วงงบประมาณ...",
+      "Send My Free Proposal Request →": "ส่งคำขอข้อเสนอฟรี →",
+      "We respect your privacy. Your details are only used to prepare your proposal and will never be shared or sold.": "เราเคารพความเป็นส่วนตัวของคุณ ข้อมูลของคุณจะใช้เพื่อจัดทำข้อเสนอเท่านั้น และจะไม่ถูกแชร์หรือขายให้บุคคลอื่น",
+      "or reach us directly": "หรือติดต่อเราโดยตรง",
+      "Call / WhatsApp: +66 (0)61 159 6553": "โทร / WhatsApp: +66 (0)61 159 6553",
+      "Columbia Pictures Aquaverse": "โคลัมเบีย พิคเจอร์ส อควาเวิร์ส",
+      "World's First Columbia Pictures Movie Theme Park": "สวนน้ำธีมภาพยนตร์ Columbia Pictures แห่งแรกของโลก",
+      "888 Moo 8, Na Jomtien, Sattahip, Chonburi 20250, Thailand": "888 หมู่ 8 นาจอมเทียน สัตหีบ ชลบุรี 20250 ประเทศไทย",
+      "Open daily 10AM–6PM · Closed Wednesdays": "เปิดทุกวัน 10:00–18:00 น. · ปิดทุกวันพุธ",
+      "Website": "เว็บไซต์",
+      "Attractions": "เครื่องเล่น",
+      "Corporate": "องค์กร",
+      "FAQs": "คำถามที่พบบ่อย",
+      "Email Us": "อีเมลหาเรา",
+      "© 2025 Columbia Pictures Location Based Entertainment Inc. All Rights Reserved · A Sony Pictures Entertainment Partnership": "© 2025 Columbia Pictures Location Based Entertainment Inc. สงวนลิขสิทธิ์ · ความร่วมมือกับ Sony Pictures Entertainment",
+      "Sarah": "สมหญิง",
+      "Johnson": "ใจดี",
+      "sarah@company.com": "name@company.com",
+      "+66 xxx xxx xxxx": "+66 xxx xxx xxxx",
+      "Acme Corporation": "ชื่อบริษัทของคุณ",
+      "HR Manager / Events Lead": "ผู้จัดการ HR / ผู้ดูแลงานอีเวนต์",
+      "e.g. November 2025 or flexible": "เช่น พฤศจิกายน 2025 หรือยืดหยุ่นได้",
+      "Special requirements, dietary needs, entertainment preferences, accessibility...": "ข้อกำหนดพิเศษ อาหารเฉพาะ ความต้องการด้านความบันเทิง การเข้าถึงสำหรับผู้พิการ..."
+    }
+  };
+
+  const originalTextNodes = [];
+  const originalPlaceholders = [];
+  const originalTitle = document.title;
+
+  function normalizeText(value) {
+    return value.replace(/\s+/g, ' ').trim();
+  }
+
+  function captureOriginals() {
+    if (originalTextNodes.length) return;
+
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode(node) {
+          const parent = node.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+          if (['SCRIPT', 'STYLE'].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+          if (!normalizeText(node.nodeValue)) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      }
+    );
+
+    let node;
+    while ((node = walker.nextNode())) {
+      originalTextNodes.push({ node, value: node.nodeValue });
+    }
+
+    document.querySelectorAll('[placeholder]').forEach(el => {
+      originalPlaceholders.push({ el, value: el.getAttribute('placeholder') });
+    });
+  }
+
+  function applyLanguage(lang) {
+    captureOriginals();
+    const dict = i18n[lang] || {};
+    document.documentElement.lang = lang === 'th' ? 'th' : 'en';
+    document.title = lang === 'th'
+      ? 'อีเวนต์องค์กร — Columbia Pictures Aquaverse'
+      : originalTitle;
+
+    originalTextNodes.forEach(item => {
+      const original = normalizeText(item.value);
+      const translated = dict[original];
+      if (lang === 'en' || !translated) {
+        item.node.nodeValue = item.value;
+      } else {
+        const leading = item.value.match(/^\s*/)[0];
+        const trailing = item.value.match(/\s*$/)[0];
+        item.node.nodeValue = leading + translated + trailing;
+      }
+    });
+
+    originalPlaceholders.forEach(item => {
+      const translated = dict[item.value];
+      item.el.setAttribute('placeholder', lang === 'en' || !translated ? item.value : translated);
+    });
+
+    localStorage.setItem('aquaverseLanguage', lang);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const select = document.getElementById('languageSelect');
+    const savedLang = localStorage.getItem('aquaverseLanguage') || 'en';
+    if (select) {
+      select.value = savedLang;
+      select.addEventListener('change', e => applyLanguage(e.target.value));
+    }
+    applyLanguage(savedLang);
+  });
+</script>
+
 <script>
   const revEls = document.querySelectorAll('.rev');
   const io = new IntersectionObserver(entries => {
@@ -973,24 +1242,60 @@ section.why > * {
   }, { threshold: 0.07 });
   revEls.forEach(r => io.observe(r));
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const fname = document.getElementById('fname').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const company = document.getElementById('company').value.trim();
-    if (!fname || !email || !phone || !company) {
-      alert('Please fill in your name, work email, phone, and company name to continue.');
-      return;
-    }
-    const btn = e.target;
-    btn.textContent = 'Sending your request...';
-    btn.disabled = true;
-    setTimeout(() => {
-      document.getElementById('form-inner').style.display = 'none';
-      const s = document.getElementById('success-msg');
-      s.style.display = 'block';
-    }, 1000);
+  const proposalForm = document.getElementById('proposalForm');
+
+  if (proposalForm) {
+    proposalForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const fname = document.getElementById('fname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const employees = document.getElementById('employees').value;
+      const btn = proposalForm.querySelector('.form-btn');
+      const originalBtnText = btn.textContent;
+      const currentLang = localStorage.getItem('aquaverseLanguage') || 'en';
+
+      if (!fname || !email || !employees) {
+        alert(currentLang === 'th'
+          ? 'กรุณากรอกชื่อ อีเมล และจำนวนพนักงานเพื่อดำเนินการต่อ'
+          : 'Please fill in your first name, email, and number of employees to continue.'
+        );
+        return;
+      }
+
+      btn.textContent = currentLang === 'th' ? 'กำลังส่งคำขอ...' : 'Sending your request...';
+      btn.disabled = true;
+
+      try {
+        const response = await fetch(proposalForm.action, {
+          method: 'POST',
+          body: new FormData(proposalForm),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          document.getElementById('form-inner').style.display = 'none';
+          const success = document.getElementById('success-msg');
+          if (currentLang === 'th') {
+            success.querySelector('h3').textContent = 'ส่งข้อมูลเรียบร้อยแล้ว';
+            success.querySelector('p').textContent = 'ขอบคุณค่ะ/ครับ เราได้รับคำขอของคุณแล้ว ทีมงานองค์กรจะติดต่อกลับภายใน 24 ชั่วโมง';
+          } else {
+            success.querySelector('h3').textContent = 'Submitted';
+            success.querySelector('p').textContent = 'Thank you. Your proposal request has been submitted successfully. Our corporate team will contact you within 24 hours.';
+          }
+          success.style.display = 'block';
+        } else {
+          throw new Error('Formspree submission failed');
+        }
+      } catch (error) {
+        alert(currentLang === 'th'
+          ? 'ส่งไม่สำเร็จ กรุณาลองอีกครั้ง หรือส่งอีเมลถึง info@columbiapicturesaquaverse.com'
+          : 'Submission failed. Please try again or email info@columbiapicturesaquaverse.com.'
+        );
+        btn.textContent = originalBtnText;
+        btn.disabled = false;
+      }
+    });
   }
 </script>
 </body>
