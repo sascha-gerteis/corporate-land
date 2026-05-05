@@ -169,8 +169,21 @@ section { padding: 88px 48px; }
 }
 .g-tile { position: relative; overflow: hidden; }
 .g-tile:first-child { grid-row: 1/3; }
-.g-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-.g-tile:hover img { transform: scale(1.05); }
+.g-tile img,
+.g-tile video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.g-tile video {
+  background: var(--surface);
+}
+.g-tile:hover img,
+.g-tile:hover video {
+  transform: scale(1.05);
+}
 .g-lbl { position: absolute; bottom: 12px; left: 12px; background: rgba(5,15,28,0.78); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); padding: 5px 11px; border-radius: 4px; }
 
 .partners-bar { background: var(--bg2); padding: 48px; }
@@ -336,13 +349,16 @@ section.why > * {
   max-width: 960px;
 }
 
-.nav-logo,
+.nav-logo {
+  overflow-wrap: anywhere;
+}
 .svc-h3,
 .p-step h3,
 .loc-row strong,
 .lb strong,
 .why-pt strong {
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .svc-card,
@@ -359,6 +375,7 @@ section.why > * {
 .svc-img,
 .why-img,
 .g-tile img,
+.g-tile video,
 .loc-map img {
   max-width: 100%;
 }
@@ -602,9 +619,580 @@ section.why > * {
 .lang-select option { background: var(--bg2); color: var(--white); }
 @media (max-width: 640px) { .lang-select { width: 100%; } }
 
+
+
+/* ── POLISH PATCH: stable headlines, hero video, company strip, real icons ── */
+.icon-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: -0.13em;
+}
+.nav-phone { margin-right: 6px; }
+.hero-bg video,
+.hero-video,
+.hero-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-video { z-index: 1; }
+.hero-fallback { z-index: 0; }
+.hero-bg::after { z-index: 2; pointer-events: none; }
+.hero h1,
+.s-h2,
+.t-big p {
+  text-wrap: balance;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: manual;
+}
+.hero h1 {
+  max-width: 11.5ch;
+  font-size: clamp(46px, 6.4vw, 84px);
+}
+.s-h2 {
+  max-width: 780px;
+}
+.partners-bar {
+  position: relative;
+  z-index: 3;
+}
+.hero + .partners-bar {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.w-ic,
+.lb-ic {
+  color: var(--cyan);
+  font-size: 19px;
+}
+.loc-ic,
+.c-alt-ic {
+  color: var(--cyan);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.c-alt-ic { flex-shrink: 0; }
+.loc-pin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.pin-icon { flex: 0 0 auto; }
+.success .chk {
+  color: var(--cyan);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,194,255,0.35);
+  background: rgba(0,194,255,0.08);
+}
+.success-icon { font-size: 30px; }
+
+@media (max-width: 900px) {
+  .hero h1 {
+    max-width: 12ch;
+    font-size: clamp(40px, 9.5vw, 64px);
+  }
+  .s-h2 { max-width: 100%; }
+}
+
+@media (max-width: 640px) {
+  .hero h1 br,
+  .s-h2 br {
+    display: none;
+  }
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(34px, 10.5vw, 48px);
+    line-height: 1.08;
+  }
+  .hero-sub {
+    max-width: 34rem;
+  }
+  .logos-row img {
+    filter: brightness(8);
+  }
+}
+
+
+/* ── FINAL UX PATCH: package CTAs, rotating logo banner, smoother scroll motion ── */
+.svc-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.svc-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.svc-feats {
+  margin-bottom: 18px;
+}
+.svc-cta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  background: rgba(26,136,255,0.14);
+  border: 1px solid rgba(0,194,255,0.34);
+  color: var(--cyan);
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+.svc-cta:hover {
+  transform: translateY(-2px);
+  background: var(--cyan);
+  color: var(--bg);
+  border-color: var(--cyan);
+  box-shadow: 0 10px 28px rgba(0,194,255,0.22);
+}
+.svc-cta .icon {
+  font-size: 16px;
+}
+
+.partners-bar {
+  overflow: hidden;
+}
+.logo-marquee {
+  position: relative;
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.logo-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 54px;
+  animation: logoMarquee 34s linear infinite;
+  will-change: transform;
+}
+.logo-track:hover {
+  animation-play-state: paused;
+}
+.logo-track img {
+  height: 36px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+  opacity: 0.54;
+  filter: brightness(10) grayscale(1);
+  flex: 0 0 auto;
+  transition: opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+}
+.logo-track img:hover {
+  opacity: 0.95;
+  transform: translateY(-2px) scale(1.04);
+  filter: brightness(10) grayscale(0);
+}
+@keyframes logoMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.rev {
+  opacity: 0;
+  transform: translateY(34px) scale(0.985);
+  filter: blur(8px);
+  transition:
+    opacity 0.82s cubic-bezier(.2,.8,.2,1),
+    transform 0.82s cubic-bezier(.2,.8,.2,1),
+    filter 0.82s cubic-bezier(.2,.8,.2,1);
+  transition-delay: calc(var(--reveal-delay, 0) * 70ms);
+  will-change: opacity, transform, filter;
+}
+.rev.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+.svc-card.rev,
+.t-card.rev,
+.p-step.rev,
+.why-pt.rev,
+.lb.rev,
+.loc-row.rev,
+.g-tile.rev {
+  transform: translateY(36px) scale(0.97);
+}
+.svc-card.rev.in,
+.t-card.rev.in,
+.p-step.rev.in,
+.why-pt.rev.in,
+.lb.rev.in,
+.loc-row.rev.in,
+.g-tile.rev.in {
+  transform: translateY(0) scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rev,
+  .rev.in {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  .logo-track { animation: none; flex-wrap: wrap; justify-content: center; width: 100%; }
+  .logo-marquee { -webkit-mask-image: none; mask-image: none; }
+}
+@media (max-width: 640px) {
+  .logo-track { gap: 34px; animation-duration: 28s; }
+  .logo-track img { height: 28px; max-width: 125px; }
+  .svc-cta { min-height: 46px; }
+}
+
+
+/* ── HUBSPOT FORM STYLING PATCH ──
+   HubSpot injects its form after page load, so these selectors are intentionally strong. */
+.hubspot-form-wrap,
+.hubspot-form-wrap form,
+.form-card .hs-form {
+  width: 100% !important;
+  max-width: 100% !important;
+  font-family: var(--sans) !important;
+  color: var(--white) !important;
+}
+
+.hubspot-form-wrap .hs-form-field,
+.hubspot-form-wrap .field,
+.form-card .hs-form .hs-form-field,
+.form-card .hs-form .field {
+  margin-bottom: 14px !important;
+}
+
+.hubspot-form-wrap label,
+.hubspot-form-wrap label span,
+.hubspot-form-wrap legend,
+.hubspot-form-wrap .hs-form-required,
+.hubspot-form-wrap .hs-richtext,
+.hubspot-form-wrap .hs-richtext p,
+.hubspot-form-wrap .legal-consent-container,
+.hubspot-form-wrap .legal-consent-container p,
+.hubspot-form-wrap .legal-consent-container span,
+.hubspot-form-wrap .inputs-list label,
+.hubspot-form-wrap .inputs-list span,
+.form-card .hs-form label,
+.form-card .hs-form label span,
+.form-card .hs-form legend,
+.form-card .hs-form .hs-form-required,
+.form-card .hs-form .hs-richtext,
+.form-card .hs-form .legal-consent-container,
+.form-card .hs-form .inputs-list label,
+.form-card .hs-form .inputs-list span {
+  color: var(--off-white) !important;
+  font-family: var(--sans) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1.45 !important;
+}
+
+.hubspot-form-wrap input[type="text"],
+.hubspot-form-wrap input[type="email"],
+.hubspot-form-wrap input[type="tel"],
+.hubspot-form-wrap input[type="number"],
+.hubspot-form-wrap input[type="date"],
+.hubspot-form-wrap select,
+.hubspot-form-wrap textarea,
+.form-card .hs-form input[type="text"],
+.form-card .hs-form input[type="email"],
+.form-card .hs-form input[type="tel"],
+.form-card .hs-form input[type="number"],
+.form-card .hs-form input[type="date"],
+.form-card .hs-form select,
+.form-card .hs-form textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 46px !important;
+  background-color: var(--bg) !important;
+  border: 1px solid rgba(0,130,255,0.25) !important;
+  border-radius: 8px !important;
+  color: var(--white) !important;
+  font-family: var(--sans) !important;
+  font-size: 14px !important;
+  padding: 12px 14px !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.hubspot-form-wrap textarea,
+.form-card .hs-form textarea {
+  min-height: 88px !important;
+  resize: vertical !important;
+}
+
+.hubspot-form-wrap input:focus,
+.hubspot-form-wrap select:focus,
+.hubspot-form-wrap textarea:focus,
+.form-card .hs-form input:focus,
+.form-card .hs-form select:focus,
+.form-card .hs-form textarea:focus {
+  border-color: var(--cyan) !important;
+  box-shadow: 0 0 0 3px rgba(0,194,255,0.08) !important;
+}
+
+.hubspot-form-wrap input::placeholder,
+.hubspot-form-wrap textarea::placeholder,
+.form-card .hs-form input::placeholder,
+.form-card .hs-form textarea::placeholder {
+  color: rgba(232,240,250,0.3) !important;
+}
+
+.hubspot-form-wrap select,
+.form-card .hs-form select {
+  cursor: pointer !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2300C2FF' d='M6 8L0 0h12z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  padding-right: 38px !important;
+}
+
+.hubspot-form-wrap select option,
+.form-card .hs-form select option {
+  background: var(--bg2) !important;
+  color: var(--white) !important;
+}
+
+.hubspot-form-wrap .hs-submit,
+.hubspot-form-wrap .actions,
+.form-card .hs-form .hs-submit,
+.form-card .hs-form .actions {
+  width: 100% !important;
+  margin-top: 4px !important;
+  text-align: center !important;
+  display: block !important;
+}
+
+.hubspot-form-wrap input[type="submit"],
+.hubspot-form-wrap .hs-button,
+.form-card .hs-form input[type="submit"],
+.form-card .hs-form .hs-button {
+  width: 100% !important;
+  min-height: 52px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  background: var(--blue-bright) !important;
+  color: #fff !important;
+  font-family: var(--serif) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  padding: 16px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease !important;
+}
+
+.hubspot-form-wrap input[type="submit"]:hover,
+.hubspot-form-wrap .hs-button:hover,
+.form-card .hs-form input[type="submit"]:hover,
+.form-card .hs-form .hs-button:hover {
+  background: var(--cyan) !important;
+  color: var(--bg) !important;
+  transform: translateY(-1px) !important;
+}
+
+.hubspot-form-wrap .hs-error-msgs,
+.hubspot-form-wrap .hs-error-msgs li,
+.hubspot-form-wrap .hs-error-msg,
+.form-card .hs-form .hs-error-msgs,
+.form-card .hs-form .hs-error-msgs li,
+.form-card .hs-form .hs-error-msg {
+  color: #ffb4b4 !important;
+  font-family: var(--sans) !important;
+  font-size: 12px !important;
+  list-style: none !important;
+  margin: 5px 0 0 !important;
+  padding: 0 !important;
+}
+
+.hubspot-form-wrap .submitted-message,
+.form-card .submitted-message {
+  color: var(--off-white) !important;
+  text-align: center !important;
+  font-family: var(--sans) !important;
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  padding: 28px 8px !important;
+}
+
+.hubspot-form-wrap .submitted-message p,
+.form-card .submitted-message p {
+  color: var(--muted) !important;
+}
+
+
+/* ── HUBSPOT WHITE BOX / OUTLINE REMOVAL ── */
+.hubspot-form-wrap,
+.hubspot-form-wrap *,
+.hubspot-form-wrap iframe,
+.hubspot-form-wrap form,
+.hubspot-form-wrap fieldset,
+.hubspot-form-wrap .hbspt-form,
+.hubspot-form-wrap .hs-form,
+.hubspot-form-wrap .hs-form-field,
+.hubspot-form-wrap .input,
+.hubspot-form-wrap .hs-input,
+.form-card .hbspt-form,
+.form-card .hs-form,
+.form-card .hs-form fieldset {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.hubspot-form-wrap,
+.hubspot-form-wrap iframe,
+.hubspot-form-wrap form,
+.hubspot-form-wrap fieldset,
+.hubspot-form-wrap .hbspt-form,
+.hubspot-form-wrap .hs-form,
+.form-card .hbspt-form,
+.form-card .hs-form,
+.form-card .hs-form fieldset {
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.hubspot-form-wrap iframe {
+  display: block !important;
+}
+
+
+/* ── FINAL HUBSPOT BUTTON NORMALIZER ──
+   Fixes HubSpot's extra reserved empty area BELOW the submit button without
+   moving the form, hiding fields, or changing the rest of the page layout. */
+#hubspot-corporate-form,
+#hubspot-corporate-form .hbspt-form,
+#hubspot-corporate-form form,
+#hubspot-corporate-form .hs-form {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#hubspot-corporate-form .hs-form-field,
+#hubspot-corporate-form .field {
+  margin-bottom: 10px !important;
+}
+
+#hubspot-corporate-form .hs-dependent-field,
+#hubspot-corporate-form fieldset,
+#hubspot-corporate-form .input,
+#hubspot-corporate-form .hs-richtext,
+#hubspot-corporate-form .legal-consent-container,
+#hubspot-corporate-form .hs_recaptcha,
+#hubspot-corporate-form .hs-recaptcha,
+#hubspot-corporate-form .grecaptcha-badge {
+  margin-bottom: 8px !important;
+  padding-bottom: 0 !important;
+  min-height: 0 !important;
+}
+
+#hubspot-corporate-form .hs_submit,
+#hubspot-corporate-form .hs-submit,
+#hubspot-corporate-form .actions,
+#hubspot-corporate-form div[class*="hs_submit"],
+#hubspot-corporate-form div[class*="hs-submit"] {
+  width: 100% !important;
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+#hubspot-corporate-form input[type="submit"],
+#hubspot-corporate-form button[type="submit"],
+#hubspot-corporate-form .hs-button {
+  width: 100% !important;
+  min-height: 52px !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#hubspot-corporate-form .hs-form > div:empty,
+#hubspot-corporate-form form > div:empty,
+#hubspot-corporate-form .hs-dependent-field:empty,
+#hubspot-corporate-form .hs-error-msgs:empty {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.form-note {
+  margin-top: 14px !important;
+}
+
 </style>
 </head>
 <body>
+
+<svg class="icon-sprite" aria-hidden="true" focusable="false">
+  <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.62 2.6a2 2 0 0 1-.45 2.11L8.09 9.62a16 16 0 0 0 6.29 6.29l1.19-1.19a2 2 0 0 1 2.11-.45c.83.29 1.7.5 2.6.62A2 2 0 0 1 22 16.92Z"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="m22 7-10 7L2 7"/></symbol>
+  <symbol id="icon-star" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></symbol>
+  <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></symbol>
+  <symbol id="icon-clapper" viewBox="0 0 24 24"><path d="M4 7h16v13H4z"/><path d="M4 7 6.6 3h4L8 7"/><path d="m12 7 2.6-4h4L16 7"/></symbol>
+  <symbol id="icon-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="m8.5 12.5-1.5 8 5-3 5 3-1.5-8"/></symbol>
+  <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="icon-parking" viewBox="0 0 24 24"><path d="M7 21V3h6a5 5 0 0 1 0 10H7"/><path d="M7 13h6"/></symbol>
+  <symbol id="icon-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 10-14h-7l1-6Z"/></symbol>
+  <symbol id="icon-clipboard" viewBox="0 0 24 24"><path d="M9 3h6l1 2h3v16H5V5h3l1-2Z"/><path d="M9 9h6M9 13h6M9 17h4"/></symbol>
+  <symbol id="icon-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+</svg>
+
 
 <nav>
   <div class="nav-logo">COLUMBIA PICTURES AQUAVERSE</div>
@@ -613,7 +1201,7 @@ section.why > * {
       <option value="en">English</option>
       <option value="th">ไทย</option>
     </select>
-    <a href="tel:+66611596553" class="nav-tel">☎ +66 (0)61 159 6553</a>
+    <a href="tel:+66611596553" class="nav-tel"><svg class="icon nav-phone"><use href="#icon-phone"></use></svg> +66 (0)61 159 6553</a>
     <a href="#get-quote" class="nav-cta">Request Corporate Rates</a>
   </div>
 </nav>
@@ -621,7 +1209,11 @@ section.why > * {
 <!-- HERO -->
 <div class="hero">
   <div class="hero-bg">
-    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885d01025b283ac06fd0e3b_1.avif" alt="Corporate Family Day at Aquaverse" onerror="this.src='https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/682592671bcc9b64f7defef2_DSC03817-min.avif'">
+    <!-- Replace hero-video.mp4 with your uploaded Webflow video URL when ready. The image remains as a fallback/poster. -->
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885d01025b283ac06fd0e3b_1.avif" onerror="this.style.display='none'">
+      <source src="https://merpsvkfmjbugrgnwwlq.supabase.co/storage/v1/object/public/Website%20Video/No.07%20Thai%20Group%20Booking%20-%20Aishin.mp4" type="video/mp4">
+    </video>
+    <img class="hero-fallback" src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885d01025b283ac06fd0e3b_1.avif" alt="Corporate Family Day at Aquaverse" onerror="this.src='https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/682592671bcc9b64f7defef2_DSC03817-min.avif'">
   </div>
   <div class="hero-content">
     <div class="eyebrow"><span></span>Corporate &amp; MICE Solutions</div>
@@ -630,6 +1222,62 @@ section.why > * {
     <div class="hero-btns">
       <a href="#get-quote" class="btn-pry">Get a Free Corporate Proposal →</a>
       <a href="#services" class="btn-ghost">Explore Packages</a>
+    </div>
+  </div>
+</div>
+
+<!-- PARTNERS -->
+<div class="partners-bar rev">
+  <p class="p-label">Trusted by Thailand's Leading Companies</p>
+  <div class="logo-marquee" aria-label="Companies we have worked with">
+    <div class="logo-track">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e14494dac6699a7c46_Thai_Oil_logo.svg.avif" alt="Thai Oil">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e11811776d326d409c_Ttb_bank_logo2.avif" alt="TTB Bank">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e1cadf15ecbd8fb192_yamaha-motor-logo-png-transparent-removebg-preview.avif" alt="Yamaha">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e0a47aef2bb40d2675_Kubota-removebg-preview.avif" alt="Kubota">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83de42f1062f8a52c6df_Frasers_Property.svg" alt="Frasers Property">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e1f3057f2e0cfbb321_32e8825cdcd5c83e029b8ce2ec8d9ef8-removebg-preview.avif" alt="Partner">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e14494dac6699a7c2e_private-issuer-squared-87SL7.avif" alt="PTT">
+      <img src="https://www.watsadupedia.com/images/2/2c/Scg.png" alt="SCG">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Denso_logo.svg/1280px-Denso_logo.svg.png" alt="Denso">
+      <img src="https://upload.wikimedia.org/wikipedia/en/5/57/KFC_logo-image.svg" alt="KFC">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BMW_logo_%28gray%29.svg/1280px-BMW_logo_%28gray%29.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail" alt="BMW">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Allianz.svg/3840px-Allianz.svg.png" alt="Allianz">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Logo_Bayer.svg/500px-Logo_Bayer.svg.png" alt="Bayer">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Logo_of_the_Sharp_Corporation.svg/3840px-Logo_of_the_Sharp_Corporation.svg.png" alt="Sharp">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Purex_%28laundry_detergent%29_logo.png" alt="Purex">
+      <img src="https://www.thaisummit.co.th/getattachment/About-TSG/Global-reach/TS-GROUP-LOGO_211222.png" alt="TSESS">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Toyota_logo_%28Red%29.svg/3840px-Toyota_logo_%28Red%29.svg.png" alt="Toyota">
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f0/Krung_Thai_Bank_logo.svg/1280px-Krung_Thai_Bank_logo.svg.png" alt="Krung thai">
+      <img src="https://www.tcp.co.th/images/templates/tcp-logo-240403.png" alt="Thai Tokai">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Isuzu.svg/1280px-Isuzu.svg.png" alt="Isuzu">
+      <img src="https://www.autoalliance.co.th/images/aat_logo.png" alt="Autoalliance">
+      <img src="https://tpacpackaging.com/wp-content/themes/TPAC/assets/img/logo.png" alt="Tpac">
+      <img src="https://jobbkk.com/upload/employer/08/9A8/0079A8/images/2020-01-229358.png" alt="Aisin">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e14494dac6699a7c46_Thai_Oil_logo.svg.avif" alt="Thai Oil">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e11811776d326d409c_Ttb_bank_logo2.avif" alt="TTB Bank">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e1cadf15ecbd8fb192_yamaha-motor-logo-png-transparent-removebg-preview.avif" alt="Yamaha">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e0a47aef2bb40d2675_Kubota-removebg-preview.avif" alt="Kubota">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83de42f1062f8a52c6df_Frasers_Property.svg" alt="Frasers Property">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e1f3057f2e0cfbb321_32e8825cdcd5c83e029b8ce2ec8d9ef8-removebg-preview.avif" alt="Partner">
+      <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e14494dac6699a7c2e_private-issuer-squared-87SL7.avif" alt="PTT">
+      <img src="https://www.watsadupedia.com/images/2/2c/Scg.png" alt="SCG">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Denso_logo.svg/1280px-Denso_logo.svg.png" alt="Denso">
+      <img src="https://upload.wikimedia.org/wikipedia/en/5/57/KFC_logo-image.svg" alt="KFC">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BMW_logo_%28gray%29.svg/1280px-BMW_logo_%28gray%29.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail" alt="BMW">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Allianz.svg/3840px-Allianz.svg.png" alt="Allianz">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Logo_Bayer.svg/500px-Logo_Bayer.svg.png" alt="Bayer">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Logo_of_the_Sharp_Corporation.svg/3840px-Logo_of_the_Sharp_Corporation.svg.png" alt="Sharp">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Purex_%28laundry_detergent%29_logo.png" alt="Purex">
+      <img src="https://www.thaisummit.co.th/getattachment/About-TSG/Global-reach/TS-GROUP-LOGO_211222.png" alt="TSESS">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Toyota_logo_%28Red%29.svg/3840px-Toyota_logo_%28Red%29.svg.png" alt="Toyota">
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f0/Krung_Thai_Bank_logo.svg/1280px-Krung_Thai_Bank_logo.svg.png" alt="Krung thai">
+      <img src="https://www.tcp.co.th/images/templates/tcp-logo-240403.png" alt="Thai Tokai">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Isuzu.svg/1280px-Isuzu.svg.png" alt="Isuzu">
+      <img src="https://www.autoalliance.co.th/images/aat_logo.png" alt="Autoalliance">
+      <img src="https://tpacpackaging.com/wp-content/themes/TPAC/assets/img/logo.png" alt="Tpac">
+      <img src="https://jobbkk.com/upload/employer/08/9A8/0079A8/images/2020-01-229358.png" alt="Aisin">
+      
     </div>
   </div>
 </div>
@@ -654,10 +1302,10 @@ section.why > * {
       <h2 class="s-h2">More Than a Day Out —<br>It's a <span class="ac">Story</span> Worth Telling</h2>
       <p style="font-size:16px;font-weight:300;color:var(--muted);line-height:1.65;margin-bottom:0;">We blend Hollywood-scale immersion, world-class facilities, and full event management to create team experiences your people will talk about for years.</p>
       <div class="why-points">
-        <div class="why-pt"><div class="w-ic">🌟</div><div><strong>World's Only Columbia Pictures Park</strong><p>Ghostbusters, Jumanji, Hotel Transylvania — a setting no ordinary venue can replicate.</p></div></div>
-        <div class="why-pt"><div class="w-ic">🎯</div><div><strong>50 to 20,000 Guests, Seamlessly</strong><p>Executive retreats to all-company family days — we scale the experience to your headcount and budget.</p></div></div>
-        <div class="why-pt"><div class="w-ic">🎬</div><div><strong>Full On-Site Event Management</strong><p>In-house planners, AV engineers, catering, and themed crew. You just show up and be the hero.</p></div></div>
-        <div class="why-pt"><div class="w-ic">🏆</div><div><strong>CNN Travel &amp; MATFA Award-Winning</strong><p>Recognised globally as one of Asia's best new theme parks. Your team will be proud you chose this.</p></div></div>
+        <div class="why-pt rev"><div class="w-ic"><svg class="icon"><use href="#icon-star"></use></svg></div><div><strong>World's Only Columbia Pictures Park</strong><p>Ghostbusters, Jumanji, Hotel Transylvania — a setting no ordinary venue can replicate.</p></div></div>
+        <div class="why-pt rev"><div class="w-ic"><svg class="icon"><use href="#icon-target"></use></svg></div><div><strong>50 to 20,000 Guests, Seamlessly</strong><p>Executive retreats to all-company family days — we scale the experience to your headcount and budget.</p></div></div>
+        <div class="why-pt rev"><div class="w-ic"><svg class="icon"><use href="#icon-clapper"></use></svg></div><div><strong>Full On-Site Event Management</strong><p>In-house planners, AV engineers, catering, and themed crew. You just show up and be the hero.</p></div></div>
+        <div class="why-pt rev"><div class="w-ic"><svg class="icon"><use href="#icon-award"></use></svg></div><div><strong>CNN Travel &amp; MATFA Award-Winning</strong><p>Recognised globally as one of Asia's best new theme parks. Your team will be proud you chose this.</p></div></div>
       </div>
     </div>
   </div>
@@ -678,6 +1326,7 @@ section.why > * {
         <ul class="svc-feats">
           <li>Full park access for all ages</li><li>Welcome stage, PA &amp; ceremony</li><li>Live entertainment &amp; mascot shows</li><li>Reserved private group area</li><li>Cashless wristband system</li><li>Halal &amp; vegetarian dining</li><li>Free parking included</li>
         </ul>
+        <a href="#get-quote" class="svc-cta">Inquire Now <svg class="icon"><use href="#icon-arrow-right"></use></svg></a>
       </div>
     </div>
     <div class="svc-card rev">
@@ -689,6 +1338,7 @@ section.why > * {
         <ul class="svc-feats">
           <li>Facilitated group challenges</li><li>Movie-themed missions &amp; games</li><li>Private event zones</li><li>Trophy &amp; recognition ceremony</li><li>Custom team branding</li>
         </ul>
+        <a href="#get-quote" class="svc-cta">Inquire Now <svg class="icon"><use href="#icon-arrow-right"></use></svg></a>
       </div>
     </div>
     <div class="svc-card rev">
@@ -700,6 +1350,7 @@ section.why > * {
         <ul class="svc-feats">
           <li>Giant HD LED screen + Dolby DTS</li><li>Custom conference zones</li><li>Breakout activities between sessions</li><li>VIP incentive packages</li>
         </ul>
+        <a href="#get-quote" class="svc-cta">Inquire Now <svg class="icon"><use href="#icon-arrow-right"></use></svg></a>
       </div>
     </div>
     <div class="svc-card rev">
@@ -711,6 +1362,7 @@ section.why > * {
         <ul class="svc-feats">
           <li>Poolside &amp; multi-function halls</li><li>Day club, Jacuzzi &amp; cabanas</li><li>Exclusive attraction access</li><li>Team dinners &amp; cocktail events</li>
         </ul>
+        <a href="#get-quote" class="svc-cta">Inquire Now <svg class="icon"><use href="#icon-arrow-right"></use></svg></a>
       </div>
     </div>
     <div class="svc-card rev">
@@ -722,6 +1374,7 @@ section.why > * {
         <ul class="svc-feats">
           <li>3× giant HD LED screens</li><li>Concert-grade Dolby DTS sound</li><li>Branded theming &amp; backdrops</li><li>Character mascots &amp; performers</li>
         </ul>
+        <a href="#get-quote" class="svc-cta">Inquire Now <svg class="icon"><use href="#icon-arrow-right"></use></svg></a>
       </div>
     </div>
     <div class="svc-card rev">
@@ -733,6 +1386,7 @@ section.why > * {
         <ul class="svc-feats">
           <li>Exclusive private venue areas</li><li>Fire shows &amp; DJ entertainment</li><li>Premium bespoke catering</li><li>Spectacular fireworks available</li>
         </ul>
+        <a href="#get-quote" class="svc-cta">Inquire Now <svg class="icon"><use href="#icon-arrow-right"></use></svg></a>
       </div>
     </div>
   </div>
@@ -743,35 +1397,37 @@ section.why > * {
   <div class="s-eye rev"><span></span>Real Events at Aquaverse</div>
   <h2 class="s-h2 rev" style="margin-bottom:32px;">See It for <span class="ac">Yourself</span></h2>
   <div class="gal-grid rev">
-    <div class="g-tile"><img src="https://cdn.prod.website-files.com/694cea9fe5738e8cf9482b62/6959dd361334dcd5063124f7_DSC06962-min.JPG" alt="Corporate event"><span class="g-lbl">Corporate Family Day</span></div>
-    <div class="g-tile"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686347cfc3f64b12063f3265_5e8de7bf-32e9-4906-aa9d-e354fc987172-min.avif" alt="Stage show"><span class="g-lbl">Live Entertainment</span></div>
-    <div class="g-tile"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/682590a9732cdfec051e551b_WhatsApp%20Image%202025-04-28%20at%2017.32.27_cac40fe2.jpg" alt="Product launch"><span class="g-lbl">Product Launch</span></div>
-    <div class="g-tile"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885cee41a74281ef08dea0a_3.avif" alt="Conference"><span class="g-lbl">Conference &amp; Incentive</span></div>
-    <div class="g-tile"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885d12745dc217b105c2f10_2.avif" alt="Gala"><span class="g-lbl">Gala Night</span></div>
+    <div class="g-tile rev">
+      <video
+        class="gallery-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label="Corporate Family Day event video"
+        oncanplay="this.play().catch(() => {})"
+        onerror="this.style.display='none'"
+      >
+        <source src="https://merpsvkfmjbugrgnwwlq.supabase.co/storage/v1/object/public/Website%20Video/No.06%20Thai%20Group%20Booking%20-%20True.mp4" type="video/mp4">
+      </video>
+      <span class="g-lbl">Corporate Family Day</span>
+    </div>
+    <div class="g-tile rev"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686347cfc3f64b12063f3265_5e8de7bf-32e9-4906-aa9d-e354fc987172-min.avif" alt="Stage show"><span class="g-lbl">Live Entertainment</span></div>
+    <div class="g-tile rev"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/682590a9732cdfec051e551b_WhatsApp%20Image%202025-04-28%20at%2017.32.27_cac40fe2.jpg" alt="Product launch"><span class="g-lbl">Product Launch</span></div>
+    <div class="g-tile rev"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885cee41a74281ef08dea0a_3.avif" alt="Conference"><span class="g-lbl">Conference &amp; Incentive</span></div>
+    <div class="g-tile rev"><img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/6885d12745dc217b105c2f10_2.avif" alt="Gala"><span class="g-lbl">Gala Night</span></div>
   </div>
 </section>
 
-<!-- PARTNERS -->
-<div class="partners-bar rev">
-  <p class="p-label">Trusted by Thailand's Leading Companies</p>
-  <div class="logos-row">
-    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e14494dac6699a7c46_Thai_Oil_logo.svg.avif" alt="Thai Oil">
-    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e11811776d326d409c_Ttb_bank_logo2.avif" alt="TTB Bank">
-    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e1cadf15ecbd8fb192_yamaha-motor-logo-png-transparent-removebg-preview.avif" alt="Yamaha">
-    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e0a47aef2bb40d2675_Kubota-removebg-preview.avif" alt="Kubota">
-    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83de42f1062f8a52c6df_Frasers_Property.svg" alt="Frasers Property">
-    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e1f3057f2e0cfbb321_32e8825cdcd5c83e029b8ce2ec8d9ef8-removebg-preview.avif" alt="Partner">
-    <img src="https://cdn.prod.website-files.com/67bec6314b9ddcacca9c0cb9/686b83e14494dac6699a7c2e_private-issuer-squared-87SL7.avif" alt="PTT">
-  </div>
-</div>
 
 <!-- TESTIMONIALS -->
 <section class="testi rev">
   <div class="s-eye"><span></span>What Clients Say</div>
   <h2 class="s-h2">Heard It From <span class="ac">Them First</span></h2>
   <div class="testi-grid">
-    <div class="t-card"><div class="stars">★★★★★</div><p class="t-quote">"Best corporate family day we've ever hosted. The rides, staff, and food were fantastic. Our team is still talking about it weeks later!"</p><span class="t-who">Maya — HR Manager, Singapore MNC</span></div>
-    <div class="t-card"><div class="stars">★★★★★</div><p class="t-quote">"We hosted our KPMG ASEAN Leaders Summit here and it was extraordinary. A conference venue unlike anything we've ever used before."</p><span class="t-who">James — Events Lead, KPMG ASEAN</span></div>
+    <div class="t-card rev"><div class="stars">★★★★★</div><p class="t-quote">"Best corporate family day we've ever hosted. The rides, staff, and food were fantastic. Our team is still talking about it weeks later!"</p><span class="t-who">Maya — HR Manager, Singapore MNC</span></div>
+    <div class="t-card rev"><div class="stars">★★★★★</div><p class="t-quote">"We hosted our KPMG ASEAN Leaders Summit here and it was extraordinary. A conference venue unlike anything we've ever used before."</p><span class="t-who">James — Events Lead, KPMG ASEAN</span></div>
   </div>
   <div class="t-big" style="margin-top:16px;">
     <p>"Columbia Pictures Aquaverse is poised to set new standards for immersive entertainment in Thailand. The theme park will be a key component in our EEC Smart City development — a truly world-class destination."</p>
@@ -785,10 +1441,10 @@ section.why > * {
   <h2 class="s-h2">Simple from First Call <span class="ac">to Big Day</span></h2>
   <p class="s-lead">Our dedicated corporate team handles every detail. You just show up and be the hero.</p>
   <div class="proc-row">
-    <div class="p-step"><div class="p-num">1</div><h3>Tell Us Your Vision</h3><p>Share your goals, group size, date, and budget — no detail too big or small.</p></div>
-    <div class="p-step"><div class="p-num">2</div><h3>We Design Your Day</h3><p>Our team builds a fully bespoke proposal — activities, catering, entertainment, branding.</p></div>
-    <div class="p-step"><div class="p-num">3</div><h3>We Handle Everything</h3><p>From setup to showtime. Our crew, planners, AV engineers, and caterers are on-site.</p></div>
-    <div class="p-step"><div class="p-num">4</div><h3>You Take the Credit</h3><p>Your team has the day of their lives. You look like a genius. Everyone goes home smiling.</p></div>
+    <div class="p-step rev"><div class="p-num">1</div><h3>Tell Us Your Vision</h3><p>Share your goals, group size, date, and budget — no detail too big or small.</p></div>
+    <div class="p-step rev"><div class="p-num">2</div><h3>We Design Your Day</h3><p>Our team builds a fully bespoke proposal — activities, catering, entertainment, branding.</p></div>
+    <div class="p-step rev"><div class="p-num">3</div><h3>We Handle Everything</h3><p>From setup to showtime. Our crew, planners, AV engineers, and caterers are on-site.</p></div>
+    <div class="p-step rev"><div class="p-num">4</div><h3>You Take the Credit</h3><p>Your team has the day of their lives. You look like a genius. Everyone goes home smiling.</p></div>
   </div>
 </section>
 
@@ -811,16 +1467,16 @@ section.why > * {
       <h2 class="s-h2">Easy to Reach<br>from <span class="ac">Bangkok</span></h2>
       <p class="s-lead" style="margin-bottom:28px;">Convenient for corporate groups from Bangkok, Pattaya, or arriving internationally.</p>
       <div class="loc-rows">
-        <div class="loc-row"><span class="loc-ic">⏱</span><div><strong>90 minutes from Bangkok</strong><p>Highway access from Suvarnabhumi Airport and central Bangkok</p></div></div>
-        <div class="loc-row"><span class="loc-ic">⏱</span><div><strong>20 minutes from Pattaya</strong><p>Ideal add-on for MICE groups already visiting Pattaya</p></div></div>
-        <div class="loc-row"><span class="loc-ic">🅿</span><div><strong>Free parking for all guests</strong><p>Coaches, vans, and private vehicles — always included</p></div></div>
-        <div class="loc-row"><span class="loc-ic">🕙</span><div><strong>Open daily 10AM – 6PM</strong><p>Closed Wednesdays. Special event hours available on request.</p></div></div>
-        <div class="loc-row"><span class="loc-ic">📍</span><div><strong>888 Moo 8, Na Jomtien, Sattahip, Chonburi 20250</strong><p>Thailand's Eastern Economic Corridor</p></div></div>
+        <div class="loc-row rev"><span class="loc-ic"><svg class="icon"><use href="#icon-clock"></use></svg></span><div><strong>90 minutes from Bangkok</strong><p>Highway access from Suvarnabhumi Airport and central Bangkok</p></div></div>
+        <div class="loc-row rev"><span class="loc-ic"><svg class="icon"><use href="#icon-clock"></use></svg></span><div><strong>20 minutes from Pattaya</strong><p>Ideal add-on for MICE groups already visiting Pattaya</p></div></div>
+        <div class="loc-row rev"><span class="loc-ic"><svg class="icon"><use href="#icon-parking"></use></svg></span><div><strong>Free parking for all guests</strong><p>Coaches, vans, and private vehicles — always included</p></div></div>
+        <div class="loc-row rev"><span class="loc-ic"><svg class="icon"><use href="#icon-clock"></use></svg></span><div><strong>Open daily 10AM – 6PM</strong><p>Closed Wednesdays. Special event hours available on request.</p></div></div>
+        <div class="loc-row rev"><span class="loc-ic"><svg class="icon"><use href="#icon-map-pin"></use></svg></span><div><strong>888 Moo 8, Na Jomtien, Sattahip, Chonburi 20250</strong><p>Thailand's Eastern Economic Corridor</p></div></div>
       </div>
     </div>
     <div class="loc-map">
       <img src="https://cdn.prod.website-files.com/694cea9fe5738e8cf9482b62/69f746d4258db1e231145d04_ChatGPT%20Image%20May%203%2C%202026%2C%2007_59_54%20PM.png" alt="Aquaverse park view" onerror="this.style.background='#0D2544'">
-      <div class="loc-pin">📍 Columbia Pictures Aquaverse · Chonburi, Thailand</div>
+      <div class="loc-pin"><svg class="icon pin-icon"><use href="#icon-map-pin"></use></svg> Columbia Pictures Aquaverse · Chonburi, Thailand</div>
     </div>
   </div>
 </section>
@@ -833,10 +1489,10 @@ section.why > * {
       <h2 class="s-h2">Let's Plan Your<br><span class="ac">Perfect Corporate Day</span></h2>
       <p class="s-lead" style="margin-bottom:28px;">Fill in the form and our dedicated corporate team will come back to you within 24 hours with a tailored proposal and pricing — completely free, no obligation.</p>
       <div class="lead-bens">
-        <div class="lb"><div class="lb-ic">⚡</div><div><strong>Response within 24 hours</strong><p>Our corporate team is available 7 days a week.</p></div></div>
-        <div class="lb"><div class="lb-ic">📋</div><div><strong>Fully bespoke proposal</strong><p>Built around your headcount, goals, and budget — not a template.</p></div></div>
-        <div class="lb"><div class="lb-ic">💰</div><div><strong>Exclusive corporate group rates</strong><p>Different to retail tickets. Volume pricing for your whole team.</p></div></div>
-        <div class="lb"><div class="lb-ic">🎬</div><div><strong>Full event management included</strong><p>We handle everything so your HR team can relax.</p></div></div>
+        <div class="lb rev"><div class="lb-ic"><svg class="icon"><use href="#icon-bolt"></use></svg></div><div><strong>Response within 24 hours</strong><p>Our corporate team is available 7 days a week.</p></div></div>
+        <div class="lb rev"><div class="lb-ic"><svg class="icon"><use href="#icon-clipboard"></use></svg></div><div><strong>Fully bespoke proposal</strong><p>Built around your headcount, goals, and budget — not a template.</p></div></div>
+        <div class="lb rev"><div class="lb-ic"><svg class="icon"><use href="#icon-coins"></use></svg></div><div><strong>Exclusive corporate group rates</strong><p>Different to retail tickets. Volume pricing for your whole team.</p></div></div>
+        <div class="lb rev"><div class="lb-ic"><svg class="icon"><use href="#icon-clapper"></use></svg></div><div><strong>Full event management included</strong><p>We handle everything so your HR team can relax.</p></div></div>
       </div>
     </div>
 
@@ -845,93 +1501,174 @@ section.why > * {
     <h3 class="form-h">Request Your Free Proposal</h3>
     <p class="form-sub">We'll respond within 24 hours with tailored options and pricing.</p>
 
-    <form id="proposalForm" action="https://formspree.io/f/maqvqapk" method="POST">
-      <div class="frow">
-        <div class="fld">
-          <label for="fname">First name *</label>
-          <input type="text" id="fname" name="First Name" required>
-        </div>
+    <div id="hubspot-corporate-form" class="hubspot-form-wrap"></div>
 
-        <div class="fld">
-          <label for="lname">Last name</label>
-          <input type="text" id="lname" name="Last Name">
-        </div>
-      </div>
+    <script charset="utf-8" type="text/javascript" src="https://js-eu1.hsforms.net/forms/embed/v2.js"></script>
+    <script>
+      function hardStyleHubSpotForm(form) {
+        const wrapper = document.getElementById('hubspot-corporate-form');
+        const root = wrapper || form;
+        if (!root) return;
 
-      <div class="frow one">
-        <div class="fld">
-          <label for="company">Company name</label>
-          <input type="text" id="company" name="Company Name">
-        </div>
-      </div>
+        const set = (elements, styles) => {
+          Array.from(elements).forEach(el => Object.assign(el.style, styles));
+        };
 
-      <div class="frow one">
-        <div class="fld">
-          <label for="email">Email *</label>
-          <input type="email" id="email" name="Email" required>
-        </div>
-      </div>
+        set(root.querySelectorAll('form, fieldset, .hbspt-form, .hs-form, .hs-form-field, .field, .input, .actions, .hs-submit, .hs_submit'), {
+          border: '0',
+          outline: 'none',
+          boxShadow: 'none',
+          background: 'transparent'
+        });
 
-      <div class="frow one">
-        <div class="fld">
-          <label for="phone">Phone number</label>
-          <input type="tel" id="phone" name="Phone Number">
-        </div>
-      </div>
+        set(root.querySelectorAll('.hs-form-field, .field'), {
+          marginBottom: '10px'
+        });
 
-      <div class="frow one">
-        <div class="fld">
-          <label for="employees">Number of employees *</label>
-          <select id="employees" name="Number of Employees" required>
-            <option value="" disabled selected>Select number of employees...</option>
-            <option>1-50</option>
-            <option>51-100</option>
-            <option>101-250</option>
-            <option>251-500</option>
-            <option>500-1000+</option>
-            <option>1000+</option>
-          </select>
-        </div>
-      </div>
+        set(root.querySelectorAll('label, label span, legend, .hs-form-required, .hs-richtext, .hs-richtext p, .legal-consent-container, .legal-consent-container p, .legal-consent-container span, .inputs-list label, .inputs-list span'), {
+          color: 'var(--off-white)',
+          fontFamily: 'var(--sans)',
+          fontSize: '12px',
+          fontWeight: '500',
+          lineHeight: '1.45'
+        });
 
-      <div class="frow one">
-        <div class="fld">
-          <label for="message">Any other requirements</label>
-          <textarea
-            id="message"
-            name="Any other requirements"
-          ></textarea>
-        </div>
-      </div>
+        set(root.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"], select, textarea'), {
+          width: '100%',
+          maxWidth: '100%',
+          backgroundColor: 'var(--bg)',
+          border: '1px solid rgba(0,130,255,0.25)',
+          borderRadius: '8px',
+          color: 'var(--white)',
+          fontFamily: 'var(--sans)',
+          fontSize: '14px',
+          padding: '12px 14px',
+          outline: 'none',
+          boxShadow: 'none'
+        });
 
-      <input type="hidden" name="_subject" value="New Aquaverse Corporate Proposal Request">
+        set(root.querySelectorAll('textarea'), {
+          minHeight: '88px',
+          resize: 'vertical'
+        });
 
-      <button type="submit" class="form-btn">
-        Send My Free Proposal Request →
-      </button>
+        set(root.querySelectorAll('.hs-recaptcha, .hs_recaptcha, .grecaptcha-badge, .legal-consent-container'), {
+          marginTop: '6px',
+          marginBottom: '8px',
+          paddingTop: '0',
+          paddingBottom: '0',
+          minHeight: '0'
+        });
+
+        set(root.querySelectorAll('.hs-submit, .hs_submit, .actions, div[class*="hs_submit"], div[class*="hs-submit"]'), {
+          width: '100%',
+          textAlign: 'center',
+          display: 'block',
+          marginTop: '8px',
+          marginBottom: '0',
+          paddingTop: '0',
+          paddingBottom: '0',
+          minHeight: '0',
+          height: 'auto'
+        });
+
+        set(root.querySelectorAll('input[type="submit"], button[type="submit"], .hs-button'), {
+          width: '100%',
+          minHeight: '52px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          background: 'var(--blue-bright)',
+          color: '#fff',
+          fontFamily: 'var(--serif)',
+          fontSize: '16px',
+          fontWeight: '700',
+          padding: '16px',
+          border: '0',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          boxShadow: 'none',
+          margin: '0'
+        });
+
+        collapseHubSpotSpaceBelowSubmit();
+      }
+
+      function collapseHubSpotSpaceBelowSubmit() {
+        const wrapper = document.getElementById('hubspot-corporate-form');
+        if (!wrapper) return;
+
+        const submitButton = wrapper.querySelector('input[type="submit"], button[type="submit"], .hs-button');
+        if (!submitButton) return;
+
+        const wrapperRect = wrapper.getBoundingClientRect();
+        const buttonRect = submitButton.getBoundingClientRect();
+
+        if (!wrapperRect.height || !buttonRect.height) return;
+
+        const visibleBottom = Math.ceil(buttonRect.bottom - wrapperRect.top + 14);
+        const currentHeight = Math.ceil(wrapper.scrollHeight || wrapperRect.height);
+
+        /*
+          Safety guard:
+          Only crop HubSpot's wrapper when there is clearly a large invisible
+          area below the button. This prevents the form from disappearing.
+        */
+        if (visibleBottom > 220 && currentHeight - visibleBottom > 40) {
+          wrapper.style.height = visibleBottom + 'px';
+          wrapper.style.maxHeight = visibleBottom + 'px';
+          wrapper.style.minHeight = '0';
+          wrapper.style.overflow = 'hidden';
+          wrapper.style.marginBottom = '0';
+          wrapper.style.paddingBottom = '0';
+        }
+      }
+
+      function applyHubSpotFixRepeatedly(form) {
+        [0, 300, 1000, 2500].forEach(delay => {
+          setTimeout(() => {
+            hardStyleHubSpotForm(form);
+            requestAnimationFrame(collapseHubSpotSpaceBelowSubmit);
+          }, delay);
+        });
+      }
+
+      hbspt.forms.create({
+        portalId: "27057828",
+        formId: "b535754e-4657-4763-a8c1-d8cb6ff0d7d5",
+        region: "eu1",
+        target: "#hubspot-corporate-form",
+        css: "",
+        cssRequired: "",
+        onFormReady: function($form) {
+          const form = $form && ($form[0] || $form);
+          applyHubSpotFixRepeatedly(form);
+        }
+      });
+    </script>
 
       <p class="form-note">
         We respect your privacy. Your details are only used to prepare your proposal and will never be shared or sold.
       </p>
-    </form>
 
     <div class="form-or">or reach us directly</div>
 
     <div class="c-alts">
       <a href="tel:+66611596553" class="c-alt">
-        <span class="c-alt-ic">📞</span>
+        <span class="c-alt-ic"><svg class="icon"><use href="#icon-phone"></use></svg></span>
         Call / WhatsApp: +66 (0)61 159 6553
       </a>
 
       <a href="mailto:info@columbiapicturesaquaverse.com?subject=Corporate%20Event%20Enquiry" class="c-alt">
-        <span class="c-alt-ic">✉️</span>
+        <span class="c-alt-ic"><svg class="icon"><use href="#icon-mail"></use></svg></span>
         info@columbiapicturesaquaverse.com
       </a>
     </div>
   </div>
 
   <div id="success-msg" class="success" aria-live="polite">
-    <span class="chk">✓</span>
+    <span class="chk"><svg class="icon success-icon"><use href="#icon-check"></use></svg></span>
     <h3>Submitted</h3>
     <p>Thank you. Your proposal request has been submitted successfully. Our corporate team will contact you within 24 hours.</p>
   </div>
@@ -973,6 +1710,7 @@ section.why > * {
       "World's first Columbia Pictures movie theme park — 90 minutes from Bangkok. Tailored corporate events from 50 to 20,000 guests.": "สวนน้ำธีมภาพยนตร์ Columbia Pictures แห่งแรกของโลก — เพียง 90 นาทีจากกรุงเทพฯ พร้อมออกแบบอีเวนต์องค์กรสำหรับแขกตั้งแต่ 50 ถึง 20,000 คน",
       "Get a Free Corporate Proposal →": "ขอข้อเสนอสำหรับองค์กรฟรี →",
       "Explore Packages": "ดูแพ็กเกจ",
+      "Inquire Now": "สอบถามตอนนี้",
       "Corporate Events Hosted": "อีเวนต์องค์กรที่จัดมาแล้ว",
       "Max Event Capacity": "รองรับแขกได้สูงสุด",
       "Average Client Rating": "คะแนนเฉลี่ยจากลูกค้า",
@@ -1096,7 +1834,7 @@ section.why > * {
       "Closed Wednesdays. Special event hours available on request.": "ปิดทุกวันพุธ สามารถขอเวลาเปิดพิเศษสำหรับอีเวนต์ได้",
       "888 Moo 8, Na Jomtien, Sattahip, Chonburi 20250": "888 หมู่ 8 นาจอมเทียน สัตหีบ ชลบุรี 20250",
       "Thailand's Eastern Economic Corridor": "เขตพัฒนาพิเศษภาคตะวันออกของประเทศไทย",
-      "📍 Columbia Pictures Aquaverse · Chonburi, Thailand": "📍 Columbia Pictures Aquaverse · ชลบุรี ประเทศไทย",
+      "Columbia Pictures Aquaverse · Chonburi, Thailand": "Columbia Pictures Aquaverse · ชลบุรี ประเทศไทย",
       "Get Your Free Proposal": "รับข้อเสนอฟรี",
       "Let's Plan Your": "ให้เราช่วยวางแผน",
       "Perfect Corporate Day": "วันองค์กรที่สมบูรณ์แบบของคุณ",
@@ -1236,67 +1974,37 @@ section.why > * {
 </script>
 
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.gallery-video').forEach(video => {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+      video.play().catch(() => {
+        // Browser may delay autoplay until the video is visible. It will retry on canplay.
+      });
+    });
+  });
+
   const revEls = document.querySelectorAll('.rev');
   const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.07 });
-  revEls.forEach(r => io.observe(r));
-
-  const proposalForm = document.getElementById('proposalForm');
-
-  if (proposalForm) {
-    proposalForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-
-      const fname = document.getElementById('fname').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const employees = document.getElementById('employees').value;
-      const btn = proposalForm.querySelector('.form-btn');
-      const originalBtnText = btn.textContent;
-      const currentLang = localStorage.getItem('aquaverseLanguage') || 'en';
-
-      if (!fname || !email || !employees) {
-        alert(currentLang === 'th'
-          ? 'กรุณากรอกชื่อ อีเมล และจำนวนพนักงานเพื่อดำเนินการต่อ'
-          : 'Please fill in your first name, email, and number of employees to continue.'
-        );
-        return;
-      }
-
-      btn.textContent = currentLang === 'th' ? 'กำลังส่งคำขอ...' : 'Sending your request...';
-      btn.disabled = true;
-
-      try {
-        const response = await fetch(proposalForm.action, {
-          method: 'POST',
-          body: new FormData(proposalForm),
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          document.getElementById('form-inner').style.display = 'none';
-          const success = document.getElementById('success-msg');
-          if (currentLang === 'th') {
-            success.querySelector('h3').textContent = 'ส่งข้อมูลเรียบร้อยแล้ว';
-            success.querySelector('p').textContent = 'ขอบคุณค่ะ/ครับ เราได้รับคำขอของคุณแล้ว ทีมงานองค์กรจะติดต่อกลับภายใน 24 ชั่วโมง';
-          } else {
-            success.querySelector('h3').textContent = 'Submitted';
-            success.querySelector('p').textContent = 'Thank you. Your proposal request has been submitted successfully. Our corporate team will contact you within 24 hours.';
-          }
-          success.style.display = 'block';
-        } else {
-          throw new Error('Formspree submission failed');
-        }
-      } catch (error) {
-        alert(currentLang === 'th'
-          ? 'ส่งไม่สำเร็จ กรุณาลองอีกครั้ง หรือส่งอีเมลถึง info@columbiapicturesaquaverse.com'
-          : 'Submission failed. Please try again or email info@columbiapicturesaquaverse.com.'
-        );
-        btn.textContent = originalBtnText;
-        btn.disabled = false;
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
       }
     });
-  }
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+  const revealGroups = ['.svc-grid', '.why-points', '.lead-bens', '.loc-rows', '.testi-grid', '.proc-row', '.gal-grid'];
+  revealGroups.forEach(selector => {
+    document.querySelectorAll(`${selector} .rev`).forEach((el, index) => {
+      el.style.setProperty('--reveal-delay', Math.min(index, 6));
+    });
+  });
+  revEls.forEach(el => io.observe(el));
 </script>
 </body>
 </html>
